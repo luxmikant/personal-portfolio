@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DomainId, DOMAINS } from "@/utils/domainConfig";
+import AvatarWrapper from "@/components/Avatar3D/AvatarWrapper";
 
 interface LoaderProps {
   domain: DomainId;
@@ -101,24 +102,15 @@ export default function Loader({
                 />
               </svg>
 
-              {/* Center avatar placeholder with glow */}
+              {/* Center 3D avatar */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  className="w-20 h-20 md:w-28 md:h-28 rounded-full"
-                  style={{
-                    background: `radial-gradient(circle, var(--domain-primary) 0%, transparent 70%)`,
-                    opacity: 0.6,
-                  }}
-                  animate={{
-                    scale: [1, 1.15, 1],
-                    opacity: [0.4, 0.7, 0.4],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                <div className="w-24 h-24 md:w-32 md:h-32">
+                  <AvatarWrapper
+                    domain={domain}
+                    size="sm"
+                    interactive={false}
+                  />
+                </div>
               </div>
 
               {/* Percentage */}
