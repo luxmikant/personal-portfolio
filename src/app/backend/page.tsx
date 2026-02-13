@@ -5,6 +5,16 @@ export const metadata: Metadata = {
   title: "Backend Engineering | Luxmikant",
   description:
     "Scalable backend systems, API design, service architecture, and production-grade engineering. SharCRM, TraderLens-AI, and more.",
+  alternates: {
+    canonical: "/backend",
+  },
+  openGraph: {
+    title: "Backend Engineering | Luxmikant",
+    description:
+      "Scalable backend systems, API design, service architecture, and production-grade engineering.",
+    url: "/backend",
+    type: "website",
+  },
 };
 
 export default function Page() {

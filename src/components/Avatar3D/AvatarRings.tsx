@@ -15,14 +15,21 @@ const RING_CONFIGS = {
 
 interface AvatarRingsProps {
   domain: DomainId;
+  reducedQuality?: boolean;
 }
 
-export default function AvatarRings({ domain }: AvatarRingsProps) {
+export default function AvatarRings({
+  domain,
+  reducedQuality = false,
+}: AvatarRingsProps) {
   const groupRef = useRef<THREE.Group>(null);
   const config = RING_CONFIGS[domain];
+  const ringCount = reducedQuality
+    ? Math.max(1, config.count - 1)
+    : config.count;
 
   const rings = useMemo(() => {
-    return Array.from({ length: config.count }, (_, i) => ({
+    return Array.from({ length: ringCount }, (_, i) => ({
       radius: 1.8 + i * 0.5,
       rotation: [
         (Math.PI / 4) * (i + 1) * 0.7,
@@ -31,7 +38,7 @@ export default function AvatarRings({ domain }: AvatarRingsProps) {
       ] as [number, number, number],
       speed: config.speed * (1 - i * 0.15),
     }));
-  }, [config.count, config.speed]);
+  }, [ringCount, config.speed]);
 
   useFrame((state) => {
     if (!groupRef.current) return;

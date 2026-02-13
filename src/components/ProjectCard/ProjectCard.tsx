@@ -42,7 +42,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted hover:text-domain-primary transition-colors text-sm"
+                className="link-underline text-muted hover:text-domain-primary transition-colors text-sm"
                 onClick={(e) => e.stopPropagation()}
               >
                 GitHub ↗
@@ -53,7 +53,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted hover:text-domain-primary transition-colors text-sm"
+                className="link-underline text-muted hover:text-domain-primary transition-colors text-sm"
                 onClick={(e) => e.stopPropagation()}
               >
                 Live ↗

@@ -34,7 +34,7 @@ export default function DomainNavigator({
         {prevDomain ? (
           <Link
             href={DOMAINS[prevDomain].route}
-            className="group flex flex-col items-start gap-1 transition-opacity hover:opacity-80"
+            className="link-underline group flex flex-col items-start gap-1 transition-opacity hover:opacity-80"
           >
             <span className="text-xs text-muted">← Previous</span>
             <span
@@ -74,7 +74,7 @@ export default function DomainNavigator({
         {nextDomain ? (
           <Link
             href={DOMAINS[nextDomain].route}
-            className="group flex flex-col items-end gap-1 transition-opacity hover:opacity-80"
+            className="link-underline group flex flex-col items-end gap-1 transition-opacity hover:opacity-80"
           >
             <span className="text-xs text-muted">Next →</span>
             <span
@@ -87,7 +87,7 @@ export default function DomainNavigator({
         ) : (
           <Link
             href="/"
-            className="group flex flex-col items-end gap-1 transition-opacity hover:opacity-80"
+            className="link-underline group flex flex-col items-end gap-1 transition-opacity hover:opacity-80"
           >
             <span className="text-xs text-muted">Back to →</span>
             <span className="text-sm font-medium gradient-text">Home</span>

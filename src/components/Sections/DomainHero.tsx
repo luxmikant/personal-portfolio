@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
+import { useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { DomainId, DOMAINS, getNextDomain } from "@/utils/domainConfig";
 import { staggerContainer, fadeInUp } from "@/utils/animationConfig";
 import AvatarWrapper from "@/components/Avatar3D/AvatarWrapper";
@@ -14,9 +16,22 @@ export default function DomainHero({ domain }: DomainHeroProps) {
   const config = DOMAINS[domain];
   const nextDomain = getNextDomain(domain);
   const isLanding = domain === "landing";
+  const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const avatarY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, shouldReduceMotion ? 0 : -90]
+  );
 
   return (
     <section
+      ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center px-6 pt-20"
       data-domain={domain}
     >
@@ -108,6 +123,7 @@ export default function DomainHero({ domain }: DomainHeroProps) {
         {/* 3D Avatar */}
         <motion.div
           className={`flex justify-center ${isLanding ? "mt-8" : "order-2"}`}
+          style={{ y: avatarY }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}

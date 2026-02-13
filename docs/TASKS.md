@@ -138,7 +138,7 @@
 ### Scroll Animations
 - [x] Integrate Lenis for smooth scroll (SmoothScrollProvider + useSmoothScroll hook)
 - [x] Create scroll reveal animations (useScrollAnimation hook, IntersectionObserver)
-- [ ] Implement parallax effects (avatar 0.3x speed on scroll)
+- [x] Implement parallax effects (avatar 0.3x speed on scroll)
 - [ ] Test animation performance (60 FPS target on desktop + mobile)
 
 ### Page Transitions
@@ -151,14 +151,14 @@
 - [x] Button hover states (scale 1.05 + glow)
 - [x] Card hover effects (y: -8 lift, border color)
 - [x] Nav active indicator (layoutId spring animation)
-- [ ] Link underline animations
+- [x] Link underline animations
 - [ ] Icon animations (Lottie)
 
 ### Performance Optimization
 - [x] Code splitting per page (Next.js static prerendering)
 - [x] Dynamic import for Three.js canvas (SSR-safe)
 - [ ] Image optimization (WebP, AVIF, responsive sizes)
-- [ ] Three.js quality reduction on mobile (lower DPR, fewer particles)
+- [x] Three.js quality reduction on mobile (lower DPR, fewer particles)
 - [ ] Bundle analysis & tree-shaking
 - [ ] Lighthouse audit & improvements (target > 90)
 
@@ -167,8 +167,8 @@
 - [ ] Keyboard navigation test
 - [ ] Screen reader testing
 - [ ] Color contrast check (domain colors vs dark background)
-- [ ] Focus indicator visibility
-- [ ] prefers-reduced-motion support for animations
+- [x] Focus indicator visibility
+- [x] prefers-reduced-motion support for animations
 
 **Deliverable**: Smooth 60fps animations, Lighthouse > 90, accessible
 
@@ -185,10 +185,10 @@
 
 ### SEO & Meta
 - [x] Basic meta tags per page (title, description via Next.js metadata)
-- [ ] Create sitemap.xml
-- [ ] Set up robots.txt
-- [ ] Add structured data (Schema.org — Person, CreativeWork)
-- [ ] Set canonical URLs
+- [x] Create sitemap.xml
+- [x] Set up robots.txt
+- [x] Add structured data (Schema.org — Person, CreativeWork)
+- [x] Set canonical URLs
 - [ ] Create OG images per domain
 
 ### Testing & QA
@@ -197,7 +197,7 @@
 - [ ] Responsive breakpoint testing (320px, 768px, 1024px, 1440px)
 - [ ] Animation smoothness check (60fps on mid-tier devices)
 - [ ] Link verification (all GitHub/project links)
-- [ ] 404 handling (custom not-found page)
+- [x] 404 handling (custom not-found page)
 
 ### Deployment
 - [x] Push to GitHub (luxmikant/personal-portfolio)
@@ -225,12 +225,10 @@
 
 ### 🔲 Remaining Work
 - Page transition animations (Barba.js integration)
-- Parallax scroll effects
-- Mobile-specific Three.js optimizations
+- Performance tuning validation (60 FPS + Lighthouse > 90)
 - Project screenshots/videos
-- SEO (sitemap, robots.txt, OG images, structured data)
+- SEO finishing pass (OG images per domain)
 - Accessibility audit (WCAG 2.1 AA)
-- Performance audit (Lighthouse > 90)
 - Cross-browser & mobile QA
 - Interactive domain demos (stretch goal)
 - Custom domain (optional)

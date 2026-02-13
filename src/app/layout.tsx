@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation/Navigation";
 import SmoothScrollProvider from "@/components/Providers/SmoothScrollProvider";
+import MotionProvider from "@/components/Providers/MotionProvider";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/utils/siteConfig";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,14 +17,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Luxmikant | Backend · Cloud · AI · Web3",
-  description:
-    "Interactive portfolio showcasing backend engineering, cloud-native systems, AI tools, and Web3 expertise. Building scalable systems in niche domains.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Luxmikant | Backend · Cloud · AI · Web3",
-    description:
-      "Interactive portfolio with storytelling-driven experience. Backend systems, cloud infrastructure, AI agents, and blockchain architecture.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    siteName: SITE_NAME,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 
@@ -31,15 +42,37 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const personStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Luxmikant",
+    url: SITE_URL,
+    sameAs: ["https://github.com/luxmikant"],
+    knowsAbout: [
+      "Backend Engineering",
+      "Cloud Native",
+      "AI Engineering",
+      "Web3",
+    ],
+  };
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SmoothScrollProvider>
-          <Navigation />
-          <main>{children}</main>
-        </SmoothScrollProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personStructuredData),
+          }}
+        />
+        <MotionProvider>
+          <SmoothScrollProvider>
+            <Navigation />
+            <main>{children}</main>
+          </SmoothScrollProvider>
+        </MotionProvider>
       </body>
     </html>
   );

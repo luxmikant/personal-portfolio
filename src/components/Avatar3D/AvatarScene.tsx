@@ -22,6 +22,10 @@ export default function AvatarScene({
   interactive = true,
 }: AvatarSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isLowPerfMode =
+    typeof window !== "undefined" &&
+    (window.matchMedia("(max-width: 768px)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
   const sizeMap = {
     sm: "w-[180px] h-[180px] md:w-[220px] md:h-[220px]",
@@ -36,8 +40,8 @@ export default function AvatarScene({
     >
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
-        dpr={[1, 2]}
-        gl={{ alpha: true, antialias: true }}
+        dpr={isLowPerfMode ? [1, 1.25] : [1, 2]}
+        gl={{ alpha: true, antialias: !isLowPerfMode }}
         style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
@@ -46,8 +50,8 @@ export default function AvatarScene({
           <pointLight position={[-10, -10, -5]} intensity={0.4} color="#7c5cfc" />
 
           <AvatarCore domain={domain} interactive={interactive} />
-          <AvatarRings domain={domain} />
-          <AvatarParticles domain={domain} />
+          <AvatarRings domain={domain} reducedQuality={isLowPerfMode} />
+          <AvatarParticles domain={domain} reducedQuality={isLowPerfMode} />
 
           <Preload all />
         </Suspense>
