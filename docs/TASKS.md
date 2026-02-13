@@ -26,34 +26,39 @@
 ## Phase 2: Avatar & 3D Model (Days 3-4)
 
 ### 3D Avatar Model
-- [ ] Source 3D avatar model (GLTF/GLB format, < 500KB)
-- [ ] Create base form model
-- [ ] Create 4 domain variant models (or morph targets)
-- [ ] Optimize models for web (compress, reduce polygons)
+- [x] ~~Source 3D avatar model~~ → **Procedurally generated** geometric forms per domain
+- [x] Create base form model (icosahedron + custom geometry per domain)
+- [x] Create 5 domain variant models (landing + 4 main domains)
+- [x] Optimize for web (MeshDistortMaterial + React Spring animations)
 
 ### Three.js Integration
-- [ ] Set up React Three Fiber (R3F) + Drei
-- [ ] Create Avatar component wrapper
-- [ ] Configure lighting, camera, environment
-- [ ] Implement model loading with suspense/fallback
-- [ ] Test on desktop & mobile
+- [x] Set up React Three Fiber (R3F) + Drei
+- [x] Create Avatar component wrapper (AvatarScene, AvatarWrapper)
+- [x] Configure lighting, camera, environment
+- [x] Implement dynamic import with SSR-safe fallback
+- [x] Tested on desktop (mobile to verify in Phase 5)
 
 ### Avatar Animations
-- [ ] Idle animation loop (breathing/floating, 3s cycle)
-- [ ] Form transition animation (morph between domains, 1s)
-- [ ] Hover glow effect (0.3s)
-- [ ] Landing bounce animation (0.5s)
-- [ ] Scroll parallax (minor movement)
+- [x] Idle animation loop (breathing cycle 3s via sin() in useFrame)
+- [x] Form transition animation (React Spring morphs color/distort/metalness per domain)
+- [x] Glow effect (CSS + domain-specific colors)
+- [x] Float animation (Drei Float component with per-domain intensity)
+- [x] Mouse follow interaction (pointer tracking on hero pages)
+
+### Orbital System
+- [x] Create AvatarParticles component (orbital particles with per-domain counts)
+- [x] Create AvatarRings component (rotating torus rings)
+- [x] Integrate into loader (replaces gradient placeholder)
 
 ### Loader UI Component
-- [ ] Create Loader component
-- [ ] Build circular progress ring (SVG stroke-dasharray)
-- [ ] Implement progress counter (0-100%)
-- [ ] Add pulsing glow effect
-- [ ] Create loading message variants per domain
-- [ ] Animate loader entrance/exit
+- [x] Create dynamic Loader component
+- [x] Build circular progress ring (SVG stroke-dasharray)
+- [x] Implement progress counter (0-100%)
+- [x] Avatar glow integrated inside ring
+- [x] Create loading message variants per domain
+- [x] Animate loader entrance/exit with AnimatePresence
 
-**Deliverable**: Avatar displays, loader functional, animations smooth
+**Deliverable**: ✅ Avatar displays with 5 domain-specific forms, loader shows 3D avatar, animations smooth
 
 ---
 
