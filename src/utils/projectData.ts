@@ -68,9 +68,9 @@ export const PROJECTS: Project[] = [
   // CLOUD-NATIVE
   // ==========================================
   {
-    title: "Armory-Intelligence",
+    title: "Armory Intelligence — The Elite Arsenal Nexus",
     description:
-      "Interactive weapons analysis platform (Star Wars vs Real-world) with AI-powered comparisons. Full Next.js stack with Tambo Generative UI.",
+      "Cinematic weapons intelligence platform comparing Star Wars blasters to real-world firearms. AI-powered analysis, holographic displays, and tactical briefings with Tambo Generative UI.",
     techStack: [
       "Next.js 15",
       "TypeScript",
@@ -78,15 +78,18 @@ export const PROJECTS: Project[] = [
       "Prisma",
       "Tailwind CSS",
       "Tambo AI",
+      "Framer Motion",
     ],
     github: "https://github.com/luxmikant/Armory-Intelligence",
+    liveUrl: "https://armory-intelligence.vercel.app/",
     domain: "cloud",
     highlights: [
-      "19 detailed weapons database",
-      "11 custom AI components via Tambo",
+      "19 weapons (Sci-Fi + Real World) with detailed specs",
+      "11 custom AI components via Tambo Generative UI",
       "Ballistics calculator with trajectory modeling",
-      "Deployed on Vercel (production-ready)",
-      "Cinematic dark theme with animations",
+      "Real-time AI comparisons & tactical analysis",
+      "Cinematic UI with scroll-driven animations",
+      "Production deployment on Vercel",
     ],
   },
 

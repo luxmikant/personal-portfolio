@@ -6,6 +6,7 @@ import { useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { DomainId, DOMAINS, getNextDomain } from "@/utils/domainConfig";
 import { staggerContainer, fadeInUp } from "@/utils/animationConfig";
 import AvatarWrapper from "@/components/Avatar3D/AvatarWrapper";
+import GlowingGrid from "@/components/GlowingGrid";
 import Link from "next/link";
 
 interface DomainHeroProps {
@@ -35,6 +36,16 @@ export default function DomainHero({ domain }: DomainHeroProps) {
       className="relative min-h-screen flex items-center justify-center px-6 pt-20"
       data-domain={domain}
     >
+      {/* Interactive Glowing Grid Background — only on landing */}
+      {isLanding && !shouldReduceMotion && (
+        <GlowingGrid
+          cellSize={65}
+          glowColor={config.colors.primary}
+          glowColorSecondary={config.colors.secondary}
+          fadeDuration={1.8}
+        />
+      )}
+
       {/* Background gradient accent */}
       <div
         className="absolute inset-0 opacity-30 pointer-events-none"
@@ -44,7 +55,7 @@ export default function DomainHero({ domain }: DomainHeroProps) {
       />
 
       <div
-        className={`relative z-10 w-full max-w-6xl mx-auto ${
+        className={`relative z-10 w-full max-w-6xl mx-auto pointer-events-none ${
           isLanding
             ? "text-center"
             : "grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
@@ -52,7 +63,7 @@ export default function DomainHero({ domain }: DomainHeroProps) {
       >
         {/* Text content */}
         <motion.div
-          className={isLanding ? "" : "order-1"}
+          className={`pointer-events-auto ${isLanding ? "" : "order-1"}`}
           variants={staggerContainer}
           initial="hidden"
           animate="visible"

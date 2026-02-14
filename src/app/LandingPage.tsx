@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import DomainHero from "@/components/Sections/DomainHero";
-import Loader from "@/components/Loader/Loader";
+import SplitLoader from "@/components/Loader/SplitLoader";
 import { DOMAINS, DOMAIN_ORDER } from "@/utils/domainConfig";
 import Link from "next/link";
 
@@ -22,11 +22,11 @@ export default function LandingPage() {
 
   return (
     <div data-domain="landing">
-      <Loader
+      <SplitLoader
         domain="landing"
         isLoading={isLoading}
         onComplete={handleLoaderComplete}
-        duration={2500}
+        duration={3000}
       />
 
       {showContent && (

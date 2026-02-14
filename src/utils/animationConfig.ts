@@ -104,3 +104,69 @@ export const scaleIn = {
     },
   },
 };
+
+// Advanced scroll animations for project cards
+export const slideInLeft = {
+  hidden: { opacity: 0, x: -60, rotate: -3 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
+
+export const slideInRight = {
+  hidden: { opacity: 0, x: 60, rotate: 3 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
+
+export const scaleRotate = {
+  hidden: { opacity: 0, scale: 0.8, rotate: -5 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
+
+export const flipIn = {
+  hidden: { opacity: 0, rotateY: 90, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    rotateY: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
+
+export const expandIn = {
+  hidden: { opacity: 0, scaleX: 0.5, scaleY: 0.8 },
+  visible: {
+    opacity: 1,
+    scaleX: 1,
+    scaleY: 1,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};

@@ -5,6 +5,7 @@ import DomainHero from "@/components/Sections/DomainHero";
 import ProjectShowcase from "@/components/Sections/ProjectShowcase";
 import SkillsSection from "@/components/Sections/SkillsSection";
 import DomainNavigator from "@/components/Sections/DomainNavigator";
+import FeedbackSection from "@/components/Sections/FeedbackSection";
 
 export default function CloudPage() {
   return (
@@ -16,6 +17,7 @@ export default function CloudPage() {
     >
       <DomainHero domain="cloud" />
       <ProjectShowcase domain="cloud" />
+      <FeedbackSection domain="cloud" />
       <SkillsSection domain="cloud" />
       <DomainNavigator currentDomain="cloud" />
     </motion.div>

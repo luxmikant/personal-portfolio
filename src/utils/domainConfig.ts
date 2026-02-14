@@ -46,9 +46,9 @@ export const DOMAINS: Record<DomainId, DomainConfig> = {
       "Designing production-grade APIs, event-driven systems, and clean architecture. From monoliths to microservices — structure, breakdown, scale.",
     route: "/backend",
     colors: {
-      primary: "#6366f1",
-      secondary: "#818cf8",
-      glow: "rgba(99, 102, 241, 0.3)",
+      primary: "#8b5cf6",
+      secondary: "#a78bfa",
+      glow: "rgba(139, 92, 246, 0.3)",
     },
     loaderMessages: [
       "Initializing scalable systems...",
@@ -66,9 +66,9 @@ export const DOMAINS: Record<DomainId, DomainConfig> = {
       "Exploring Kubernetes, observability, and deployment pipelines. Building reliable, distributed systems on cloud-native foundations.",
     route: "/cloud",
     colors: {
-      primary: "#06b6d4",
-      secondary: "#22d3ee",
-      glow: "rgba(6, 182, 212, 0.3)",
+      primary: "#f97316",
+      secondary: "#fb923c",
+      glow: "rgba(249, 115, 22, 0.3)",
     },
     loaderMessages: [
       "Orchestrating infrastructure...",
