@@ -26,9 +26,9 @@ export const DOMAINS: Record<DomainId, DomainConfig> = {
       "Building scalable systems in niche domains. From financial intelligence to decentralized networks.",
     route: "/",
     colors: {
-      primary: "#7c5cfc",
-      secondary: "#a78bfa",
-      glow: "rgba(124, 92, 252, 0.25)",
+      primary: "#7c6cf0",
+      secondary: "#b4a0fa",
+      glow: "rgba(124, 108, 240, 0.15)",
     },
     loaderMessages: [
       "Initializing portfolio...",
@@ -44,11 +44,11 @@ export const DOMAINS: Record<DomainId, DomainConfig> = {
     subtitle: "Scalable Systems & Architecture",
     description:
       "Designing production-grade APIs, event-driven systems, and clean architecture. From monoliths to microservices — structure, breakdown, scale.",
-    route: "/backend",
+    route: "/#backend",
     colors: {
-      primary: "#8b5cf6",
-      secondary: "#a78bfa",
-      glow: "rgba(139, 92, 246, 0.3)",
+      primary: "#7c6cf0",
+      secondary: "#b4a0fa",
+      glow: "rgba(124, 108, 240, 0.15)",
     },
     loaderMessages: [
       "Initializing scalable systems...",
@@ -64,11 +64,11 @@ export const DOMAINS: Record<DomainId, DomainConfig> = {
     subtitle: "Infrastructure at Scale",
     description:
       "Exploring Kubernetes, observability, and deployment pipelines. Building reliable, distributed systems on cloud-native foundations.",
-    route: "/cloud",
+    route: "/#cloud",
     colors: {
-      primary: "#f97316",
-      secondary: "#fb923c",
-      glow: "rgba(249, 115, 22, 0.3)",
+      primary: "#e88c3a",
+      secondary: "#f5b070",
+      glow: "rgba(232, 140, 58, 0.15)",
     },
     loaderMessages: [
       "Orchestrating infrastructure...",
@@ -84,11 +84,11 @@ export const DOMAINS: Record<DomainId, DomainConfig> = {
     subtitle: "Intelligent Systems",
     description:
       "Engineering AI into production systems. Multi-agent orchestration, RAG pipelines, and developer tooling powered by LLMs.",
-    route: "/ai",
+    route: "/#ai",
     colors: {
-      primary: "#10b981",
-      secondary: "#ec4899",
-      glow: "rgba(16, 185, 129, 0.3)",
+      primary: "#2bb58e",
+      secondary: "#e07cad",
+      glow: "rgba(43, 181, 142, 0.15)",
     },
     loaderMessages: [
       "Booting neural networks...",
@@ -104,11 +104,11 @@ export const DOMAINS: Record<DomainId, DomainConfig> = {
     subtitle: "Decentralized & On-Chain",
     description:
       "Experimenting with smart contracts, on-chain architecture, and cloud-chain hybrid systems. Exploring the decentralization frontier.",
-    route: "/web3",
+    route: "/#web3",
     colors: {
-      primary: "#a855f7",
-      secondary: "#f59e0b",
-      glow: "rgba(168, 85, 247, 0.3)",
+      primary: "#9b6ef0",
+      secondary: "#e5a820",
+      glow: "rgba(155, 110, 240, 0.15)",
     },
     loaderMessages: [
       "Deploying smart contracts...",

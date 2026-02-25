@@ -1,78 +1,82 @@
 /* ============================================
-   PORTFOLIO GLOBAL STYLES
+   PORTFOLIO GLOBAL STYLES — Light Theme
    ============================================ */
 @import "tailwindcss";
 
 /* ============================================
-   BASE THEME — Dark, Modern, Tech-Forward
+   BASE THEME — Warm, Clean, Premium
    ============================================ */
 :root {
-  /* Base colors */
-  --background: #0a0a0f;
-  --foreground: #e8e8ed;
-  --surface: #12121a;
-  --surface-light: #1a1a25;
-  --border: #2a2a3a;
-  --muted: #6b6b80;
+  /* Base colors — warm off-white */
+  --background: #faf9f7;
+  --foreground: #1a1a2e;
+  --surface: #ffffff;
+  --surface-light: #f5f3ef;
+  --border: #e5e2db;
+  --muted: #7a7a8c;
 
   /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
   /* Active domain (set dynamically) */
-  --domain-primary: #7c5cfc;
-  --domain-secondary: #5c8cfc;
-  --domain-glow: rgba(124, 92, 252, 0.3);
+  --domain-primary: #7c6cf0;
+  --domain-secondary: #a78bfa;
+  --domain-glow: rgba(124, 108, 240, 0.18);
 
   /* Animation tokens */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 600ms ease;
   --transition-domain: 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Scroll progress */
+  --scroll-progress: 0;
 }
 
 /* ============================================
    DOMAIN COLOR THEMES (CSS Custom Properties)
+   Softer, pastel-tinted accents for light bg
    ============================================ */
 
-/* Landing — Neutral, grounded */
+/* Landing — Soft violet */
 [data-domain="landing"] {
-  --domain-primary: #7c5cfc;
-  --domain-secondary: #a78bfa;
-  --domain-glow: rgba(124, 92, 252, 0.25);
-  --domain-bg-accent: rgba(124, 92, 252, 0.05);
+  --domain-primary: #7c6cf0;
+  --domain-secondary: #b4a0fa;
+  --domain-glow: rgba(124, 108, 240, 0.15);
+  --domain-bg-accent: rgba(124, 108, 240, 0.06);
 }
 
-/* Backend Engineering — Violet, purple */
+/* Backend Engineering — Lavender violet */
 [data-domain="backend"] {
-  --domain-primary: #8b5cf6;
-  --domain-secondary: #a78bfa;
-  --domain-glow: rgba(139, 92, 246, 0.3);
-  --domain-bg-accent: rgba(139, 92, 246, 0.05);
+  --domain-primary: #7c6cf0;
+  --domain-secondary: #b4a0fa;
+  --domain-glow: rgba(124, 108, 240, 0.15);
+  --domain-bg-accent: rgba(124, 108, 240, 0.06);
 }
 
-/* Cloud-Native — Orange, coral */
+/* Cloud-Native — Warm amber */
 [data-domain="cloud"] {
-  --domain-primary: #f97316;
-  --domain-secondary: #fb923c;
-  --domain-glow: rgba(249, 115, 22, 0.3);
-  --domain-bg-accent: rgba(249, 115, 22, 0.05);
+  --domain-primary: #e88c3a;
+  --domain-secondary: #f5b070;
+  --domain-glow: rgba(232, 140, 58, 0.15);
+  --domain-bg-accent: rgba(232, 140, 58, 0.06);
 }
 
-/* AI Tools — Neon green, electric pink */
+/* AI Tools — Soft teal */
 [data-domain="ai"] {
-  --domain-primary: #10b981;
-  --domain-secondary: #ec4899;
-  --domain-glow: rgba(16, 185, 129, 0.3);
-  --domain-bg-accent: rgba(16, 185, 129, 0.05);
+  --domain-primary: #2bb58e;
+  --domain-secondary: #e07cad;
+  --domain-glow: rgba(43, 181, 142, 0.15);
+  --domain-bg-accent: rgba(43, 181, 142, 0.06);
 }
 
-/* Web3 — Neon purple, gold */
+/* Web3 — Soft purple + warm gold */
 [data-domain="web3"] {
-  --domain-primary: #a855f7;
-  --domain-secondary: #f59e0b;
-  --domain-glow: rgba(168, 85, 247, 0.3);
-  --domain-bg-accent: rgba(168, 85, 247, 0.05);
+  --domain-primary: #9b6ef0;
+  --domain-secondary: #e5a820;
+  --domain-glow: rgba(155, 110, 240, 0.15);
+  --domain-bg-accent: rgba(155, 110, 240, 0.06);
 }
 
 /* ============================================
@@ -124,6 +128,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
+  color: var(--foreground);
 }
 
 h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
@@ -139,14 +144,14 @@ p {
    UTILITY CLASSES
    ============================================ */
 
-/* Domain glow effect */
+/* Domain glow effect — softer for light theme */
 .domain-glow {
-  box-shadow: 0 0 30px var(--domain-glow),
-              0 0 60px var(--domain-glow);
+  box-shadow: 0 0 20px var(--domain-glow),
+              0 0 40px var(--domain-glow);
 }
 
 .domain-glow-text {
-  text-shadow: 0 0 20px var(--domain-glow);
+  text-shadow: 0 0 15px var(--domain-glow);
 }
 
 /* Gradient text */
@@ -157,12 +162,13 @@ p {
   background-clip: text;
 }
 
-/* Glass panel */
+/* Glass panel — light frosted glass */
 .glass {
-  background: rgba(18, 18, 26, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 /* Smooth scrollbar */
@@ -183,29 +189,16 @@ p {
   background: var(--muted);
 }
 
-/* ============================================
-   PAGE TRANSITION STYLES
-   ============================================ */
-.page-transition-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.page-transition-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  height: 2px;
+  z-index: 49;
+  background: linear-gradient(90deg, #7c6cf0, #e88c3a, #2bb58e, #9b6ef0);
+  transform-origin: left;
+  pointer-events: none;
 }
 
 /* ============================================
@@ -231,10 +224,10 @@ p {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px var(--domain-glow);
+    box-shadow: 0 0 15px var(--domain-glow);
   }
   50% {
-    box-shadow: 0 0 40px var(--domain-glow), 0 0 80px var(--domain-glow);
+    box-shadow: 0 0 25px var(--domain-glow), 0 0 50px var(--domain-glow);
   }
 }
 
@@ -270,7 +263,7 @@ p {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0.03) 50%,
     transparent 100%
   );
   background-size: 200% 100%;
@@ -292,12 +285,20 @@ p {
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 220ms ease;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .link-underline:hover::after,
 .link-underline:focus-visible::after {
   transform: scaleX(1);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 auto;
+  max-width: 80%;
 }
 
 @media (prefers-reduced-motion: reduce) {

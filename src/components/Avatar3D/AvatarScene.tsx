@@ -47,7 +47,7 @@ export default function AvatarScene({
         <Suspense fallback={null}>
           <ambientLight intensity={0.3} />
           <pointLight position={[10, 10, 10]} intensity={0.8} />
-          <pointLight position={[-10, -10, -5]} intensity={0.4} color="#7c5cfc" />
+          <pointLight position={[-10, -10, -5]} intensity={0.4} color="#7c6cf0" />
 
           <AvatarCore domain={domain} interactive={interactive} />
           <AvatarRings domain={domain} reducedQuality={isLowPerfMode} />

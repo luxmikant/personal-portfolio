@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return SITE_PATHS.map((path) => ({
     url: `${SITE_URL}${path}`,
     lastModified: now,
-    changeFrequency: path === "/" ? "weekly" : "monthly",
-    priority: path === "/" ? 1 : 0.8,
+    changeFrequency: "weekly" as const,
+    priority: 1,
   }));
 }

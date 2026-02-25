@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useCallback } from "react";
 
 interface GlowingGridProps {
   /** Grid cell size in pixels */
   cellSize?: number;
-  /** Glow color — CSS color string */
+  /** Glow color — CSS color string (hex) */
   glowColor?: string;
   /** Secondary glow color for gradient effect */
   glowColorSecondary?: string;
@@ -16,100 +15,183 @@ interface GlowingGridProps {
   active?: boolean;
 }
 
+function hexToRgb(hex: string): [number, number, number] {
+  const clean = hex.replace("#", "");
+  return [
+    parseInt(clean.substring(0, 2), 16),
+    parseInt(clean.substring(2, 4), 16),
+    parseInt(clean.substring(4, 6), 16),
+  ];
+}
+
+interface ActiveCell {
+  col: number;
+  row: number;
+  alpha: number;
+  startTime: number;
+}
+
 export default function GlowingGrid({
-  cellSize = 60,
-  glowColor = "var(--domain-primary)",
-  glowColorSecondary = "var(--domain-secondary)",
+  cellSize = 38,
+  glowColor = "#7c6cf0",
+  glowColorSecondary = "#b4a0fa",
   fadeDuration = 1.8,
   active = true,
 }: GlowingGridProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [cells, setCells] = useState<number>(0);
-  const [cols, setCols] = useState(0);
-  const [rows, setRows] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const activeCellsRef = useRef<Map<string, ActiveCell>>(new Map());
+  const animFrameRef = useRef<number>(0);
+  const mousePos = useRef<{ x: number; y: number }>({ x: -1, y: -1 });
 
-  // Calculate grid dimensions
-  const updateGrid = useCallback(() => {
-    if (!containerRef.current) return;
-    const { offsetWidth, offsetHeight } = containerRef.current;
-    const c = Math.ceil(offsetWidth / cellSize);
-    const r = Math.ceil(offsetHeight / cellSize);
-    setCols(c);
-    setRows(r);
-    setCells(c * r);
-  }, [cellSize]);
+  const draw = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const { width, height } = canvas;
+    const cols = Math.ceil(width / cellSize);
+    const rows = Math.ceil(height / cellSize);
+    const now = performance.now();
+    const rgb = hexToRgb(glowColor);
+    const rgb2 = hexToRgb(glowColorSecondary);
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw base grid lines (very subtle)
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.04)";
+    ctx.lineWidth = 0.5;
+    for (let c = 0; c <= cols; c++) {
+      ctx.beginPath();
+      ctx.moveTo(c * cellSize, 0);
+      ctx.lineTo(c * cellSize, height);
+      ctx.stroke();
+    }
+    for (let r = 0; r <= rows; r++) {
+      ctx.beginPath();
+      ctx.moveTo(0, r * cellSize);
+      ctx.lineTo(width, r * cellSize);
+      ctx.stroke();
+    }
+
+    // Add mouse-hover cell
+    if (mousePos.current.x >= 0 && mousePos.current.y >= 0) {
+      const col = Math.floor(mousePos.current.x / cellSize);
+      const row = Math.floor(mousePos.current.y / cellSize);
+      const key = `${col}-${row}`;
+      activeCellsRef.current.set(key, { col, row, alpha: 1, startTime: now });
+
+      // Also light neighbors at lower intensity
+      for (const [dc, dr] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+        const nc = col + dc;
+        const nr = row + dr;
+        if (nc >= 0 && nc < cols && nr >= 0 && nr < rows) {
+          const nkey = `${nc}-${nr}`;
+          const existing = activeCellsRef.current.get(nkey);
+          if (!existing || existing.alpha < 0.4) {
+            activeCellsRef.current.set(nkey, { col: nc, row: nr, alpha: 0.4, startTime: now });
+          }
+        }
+      }
+    }
+
+    // Draw active (glowing) cells
+    activeCellsRef.current.forEach((cell, key) => {
+      const elapsed = (now - cell.startTime) / 1000;
+      const fadeAlpha = Math.max(0, cell.alpha - (elapsed / fadeDuration) * cell.alpha);
+
+      if (fadeAlpha <= 0.01) {
+        activeCellsRef.current.delete(key);
+        return;
+      }
+
+      const x = cell.col * cellSize;
+      const y = cell.row * cellSize;
+
+      // Cell fill with glow
+      const gradient = ctx.createRadialGradient(
+        x + cellSize / 2, y + cellSize / 2, 0,
+        x + cellSize / 2, y + cellSize / 2, cellSize * 0.8
+      );
+      gradient.addColorStop(0, `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${fadeAlpha * 0.3})`);
+      gradient.addColorStop(0.6, `rgba(${rgb2[0]}, ${rgb2[1]}, ${rgb2[2]}, ${fadeAlpha * 0.15})`);
+      gradient.addColorStop(1, `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0)`);
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(x, y, cellSize, cellSize);
+
+      // Bright border for active cell
+      ctx.strokeStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${fadeAlpha * 0.25})`;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x, y, cellSize, cellSize);
+    });
+
+    // Radial vignette overlay for readability
+    const vignette = ctx.createRadialGradient(
+      width / 2, height / 2, Math.min(width, height) * 0.25,
+      width / 2, height / 2, Math.max(width, height) * 0.55
+    );
+    vignette.addColorStop(0, "rgba(250, 249, 247, 0)");
+    vignette.addColorStop(1, "rgba(250, 249, 247, 0.85)");
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, width, height);
+
+    animFrameRef.current = requestAnimationFrame(draw);
+  }, [cellSize, glowColor, glowColorSecondary, fadeDuration]);
 
   useEffect(() => {
-    updateGrid();
-    window.addEventListener("resize", updateGrid);
-    return () => window.removeEventListener("resize", updateGrid);
-  }, [updateGrid]);
+    if (!active) return;
 
-  // Mouse enter handler for each cell
-  const handleMouseEnter = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const cell = e.currentTarget;
-      // Instant light up
-      cell.style.transition = "none";
-      cell.style.backgroundColor = glowColor;
-      cell.style.boxShadow = `0 0 15px ${glowColor}, 0 0 30px ${glowColor}, inset 0 0 10px ${glowColorSecondary}`;
-      cell.style.borderColor = glowColor;
-    },
-    [glowColor, glowColorSecondary]
-  );
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-  // Mouse leave handler — slow fade
-  const handleMouseLeave = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const cell = e.currentTarget;
-      cell.style.transition = `background-color ${fadeDuration}s ease, box-shadow ${fadeDuration}s ease, border-color ${fadeDuration}s ease`;
-      cell.style.backgroundColor = "transparent";
-      cell.style.boxShadow = "none";
-      cell.style.borderColor = "rgba(255,255,255,0.03)";
-    },
-    [fadeDuration]
-  );
+    const resize = () => {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const dpr = Math.min(window.devicePixelRatio, 2);
+      canvas.width = parent.offsetWidth * dpr;
+      canvas.height = parent.offsetHeight * dpr;
+      canvas.style.width = `${parent.offsetWidth}px`;
+      canvas.style.height = `${parent.offsetHeight}px`;
+      const ctx = canvas.getContext("2d");
+      if (ctx) ctx.scale(dpr, dpr);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mousePos.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      };
+    };
+    const handleMouseLeave = () => {
+      mousePos.current = { x: -1, y: -1 };
+    };
+
+    canvas.addEventListener("mousemove", handleMouseMove);
+    canvas.addEventListener("mouseleave", handleMouseLeave);
+
+    animFrameRef.current = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(animFrameRef.current);
+      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [active, draw]);
 
   if (!active) return null;
 
   return (
-    <div
-      ref={containerRef}
-      className="absolute inset-0 overflow-hidden pointer-events-auto"
-      style={{ zIndex: 0 }}
-    >
-      {/* Grid container */}
-      <div
-        className="grid w-full h-full"
-        style={{
-          gridTemplateColumns: `repeat(${cols}, 1fr)`,
-          gridTemplateRows: `repeat(${rows}, 1fr)`,
-          gap: 0,
-        }}
-      >
-        {Array.from({ length: cells }).map((_, i) => (
-          <div
-            key={i}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              backgroundColor: "transparent",
-              border: "1px solid rgba(255,255,255,0.03)",
-              transition: `background-color ${fadeDuration}s ease, box-shadow ${fadeDuration}s ease`,
-              cursor: "crosshair",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Subtle gradient overlay so content above reads clearly */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(ellipse at 50% 50%, transparent 30%, var(--background) 80%)
-          `,
-        }}
+    <div className="absolute inset-0 overflow-hidden pointer-events-auto" style={{ zIndex: 0 }}>
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full"
+        style={{ cursor: "crosshair" }}
       />
     </div>
   );

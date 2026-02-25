@@ -6,11 +6,11 @@ import * as THREE from "three";
 import { DomainId } from "@/utils/domainConfig";
 
 const RING_CONFIGS = {
-  landing: { count: 2, color: "#7c5cfc", opacity: 0.15, speed: 0.3 },
-  backend: { count: 3, color: "#6366f1", opacity: 0.2, speed: 0.4 },
-  cloud: { count: 2, color: "#06b6d4", opacity: 0.15, speed: 0.5 },
-  ai: { count: 3, color: "#10b981", opacity: 0.18, speed: 0.35 },
-  web3: { count: 3, color: "#a855f7", opacity: 0.2, speed: 0.25 },
+  landing: { count: 2, color: "#7c6cf0", opacity: 0.2, speed: 0.3 },
+  backend: { count: 3, color: "#7c6cf0", opacity: 0.25, speed: 0.4 },
+  cloud: { count: 2, color: "#e88c3a", opacity: 0.2, speed: 0.5 },
+  ai: { count: 3, color: "#2bb58e", opacity: 0.22, speed: 0.35 },
+  web3: { count: 3, color: "#9b6ef0", opacity: 0.25, speed: 0.25 },
 };
 
 interface AvatarRingsProps {

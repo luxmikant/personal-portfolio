@@ -8,4 +8,4 @@ export const SITE_TITLE = "Luxmikant | Backend · Cloud · AI · Web3";
 export const SITE_DESCRIPTION =
   "Interactive portfolio showcasing backend engineering, cloud-native systems, AI tools, and Web3 expertise.";
 
-export const SITE_PATHS = ["/", "/backend", "/cloud", "/ai", "/web3"] as const;
+export const SITE_PATHS = ["/"] as const;

@@ -6,11 +6,11 @@ import * as THREE from "three";
 import { DomainId } from "@/utils/domainConfig";
 
 const PARTICLE_CONFIGS = {
-  landing: { count: 40, radius: 2.5, size: 0.025, color: "#7c5cfc", speed: 0.3, opacity: 0.6 },
-  backend: { count: 30, radius: 2.8, size: 0.03, color: "#818cf8", speed: 0.4, opacity: 0.7 },
-  cloud: { count: 80, radius: 3.0, size: 0.02, color: "#22d3ee", speed: 0.6, opacity: 0.5 },
-  ai: { count: 60, radius: 2.6, size: 0.028, color: "#10b981", speed: 0.5, opacity: 0.65 },
-  web3: { count: 35, radius: 2.8, size: 0.035, color: "#a855f7", speed: 0.35, opacity: 0.75 },
+  landing: { count: 40, radius: 2.5, size: 0.025, color: "#7c6cf0", speed: 0.3, opacity: 0.6 },
+  backend: { count: 30, radius: 2.8, size: 0.03, color: "#b4a0fa", speed: 0.4, opacity: 0.7 },
+  cloud: { count: 80, radius: 3.0, size: 0.02, color: "#e88c3a", speed: 0.6, opacity: 0.5 },
+  ai: { count: 60, radius: 2.6, size: 0.028, color: "#2bb58e", speed: 0.5, opacity: 0.65 },
+  web3: { count: 35, radius: 2.8, size: 0.035, color: "#9b6ef0", speed: 0.35, opacity: 0.75 },
 };
 
 function pseudoRandom(seed: number) {
