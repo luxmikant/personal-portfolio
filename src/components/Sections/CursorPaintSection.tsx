@@ -5,67 +5,71 @@ import { motion } from "framer-motion";
 
 /* ─── Constants ─────────────────────────────────────────────────────────── */
 
-/** Each pixel-art "block" in px */
-const GRID = 22;
+/** Soft-blob brush radius in px */
+const RADIUS = 52;
 
-/** Portfolio accent palette  violet → teal → amber → purple → violet */
+/** Step distance between interpolated blobs (smaller = denser trail) */
+const STEP = 10;
+
+/** Portfolio accent palette:  violet → teal → amber → purple → violet */
 const PALETTE: [number, number, number][] = [
-  [248, 81, 62],   // Violet  #7c6cf0
-  [160, 62, 44],   // Teal    #2bb58e
-  [30,  80, 56],   // Amber   #e88c3a
-  [268, 81, 69],   // Purple  #9b6ef0
-  [248, 81, 62],   // Violet  (closes the loop)
+  [248, 76, 62],   // Violet  #7c6cf0
+  [162, 62, 44],   // Teal    #2bb58e
+  [30,  80, 58],   // Amber   #e88c3a
+  [268, 76, 66],   // Purple  #9b6ef0
+  [248, 76, 62],   // Violet  (loop close)
 ];
 
 const HIDDEN_TEXT = ["Code is the brush.", "Systems are the canvas."];
-const SECTION_BG = "#0f0f1a";
 
-/* ─── Colour helper ──────────────────────────────────────────────────────── */
-function lerpHsl(t: number): string {
+/** Matches the portfolio warm off-white */
+const SECTION_BG = "#faf9f7";
+
+/* ─── Helpers ────────────────────────────────────────────────────────────── */
+
+function lerpHsla(t: number, alpha: number): string {
   const n = PALETTE.length - 1;
   const i = Math.min(Math.floor(t * n), n - 1);
   const f = t * n - i;
   const [h1, s1, l1] = PALETTE[i];
   const [h2, s2, l2] = PALETTE[i + 1];
-  return `hsl(${h1 + (h2 - h1) * f},${(s1 + (s2 - s1) * f).toFixed(1)}%,${(l1 + (l2 - l1) * f).toFixed(1)}%)`;
+  const h = h1 + (h2 - h1) * f;
+  const s = s1 + (s2 - s1) * f;
+  const l = l1 + (l2 - l1) * f;
+  return `hsla(${h.toFixed(1)},${s.toFixed(1)}%,${l.toFixed(1)}%,${alpha})`;
 }
 
 /* ─── Component ─────────────────────────────────────────────────────────── */
 export default function CursorPaintSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const canvasRef  = useRef<HTMLCanvasElement>(null);
-
+  const canvasRef   = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef(0);
   const lastRef     = useRef<{ x: number; y: number } | null>(null);
-
   const [hasStarted, setHasStarted] = useState(false);
 
-  /* Draw the hidden-message mask on top of whatever is on the canvas.
-     The text is filled with SECTION_BG colour → on painted blocks it
-     appears as a dark cut-out; on the transparent canvas it's invisible. */
+  /* Re-stamp the hidden text in SECTION_BG over painted areas so the glyphs
+     appear as negative-space cutouts inside the color trail. */
   const drawTextMask = useCallback(
     (ctx: CanvasRenderingContext2D, w: number, h: number) => {
       ctx.save();
-      ctx.fillStyle = SECTION_BG;
-      ctx.textAlign = "center";
+      ctx.globalAlpha  = 1;
+      ctx.fillStyle    = SECTION_BG;
+      ctx.textAlign    = "center";
       ctx.textBaseline = "middle";
 
-      const fontSize = Math.max(26, Math.min(68, w * 0.058));
+      const fontSize = Math.max(28, Math.min(72, w * 0.06));
       ctx.font = `bold ${fontSize}px 'Geist Sans', 'Inter', system-ui, sans-serif`;
 
-      const lineH   = fontSize * 1.4;
-      const totalH  = HIDDEN_TEXT.length * lineH;
-      const startY  = h / 2 - totalH / 2 + lineH / 2;
+      const lineH  = fontSize * 1.45;
+      const totalH = HIDDEN_TEXT.length * lineH;
+      const startY = h / 2 - totalH / 2 + lineH / 2;
 
-      HIDDEN_TEXT.forEach((line, i) => {
-        ctx.fillText(line, w / 2, startY + i * lineH);
-      });
+      HIDDEN_TEXT.forEach((line, i) => ctx.fillText(line, w / 2, startY + i * lineH));
       ctx.restore();
     },
     []
   );
 
-  /* Paint one pixelated block and re-stamp the text mask on top */
+  /* Paint a single soft radial blob at (x, y). */
   const paintAt = useCallback(
     (x: number, y: number) => {
       const canvas = canvasRef.current;
@@ -73,26 +77,39 @@ export default function CursorPaintSection() {
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      const gx = Math.floor(x / GRID) * GRID;
-      const gy = Math.floor(y / GRID) * GRID;
+      const t = progressRef.current % 1;
 
-      ctx.fillStyle = lerpHsl(progressRef.current % 1);
-      ctx.fillRect(gx, gy, GRID - 1, GRID - 1);
+      // Radial gradient: vivid opaque centre → fully transparent edge
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, RADIUS);
+      grad.addColorStop(0,    lerpHsla(t, 0.82));
+      grad.addColorStop(0.45, lerpHsla(t, 0.60));
+      grad.addColorStop(0.80, lerpHsla(t, 0.22));
+      grad.addColorStop(1,    lerpHsla(t, 0));
 
+      ctx.beginPath();
+      ctx.arc(x, y, RADIUS, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Re-stamp text mask so text always punches through the color
       drawTextMask(ctx, canvas.width, canvas.height);
-      progressRef.current += 0.0022;
+
+      progressRef.current += 0.002;
     },
     [drawTextMask]
   );
 
-  /* Interpolate from last position to current (fills gaps at high speed) */
+  /* Smooth interpolation between cursor positions. */
   const handleMove = useCallback(
     (clientX: number, clientY: number) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      const cx   = clientX - rect.left;
-      const cy   = clientY - rect.top;
+      const rect   = canvas.getBoundingClientRect();
+      // Account for device-pixel-ratio scaling
+      const scaleX = canvas.width  / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const cx = (clientX - rect.left) * scaleX;
+      const cy = (clientY - rect.top)  * scaleY;
 
       if (cx < 0 || cy < 0 || cx > canvas.width || cy > canvas.height) {
         lastRef.current = null;
@@ -104,8 +121,8 @@ export default function CursorPaintSection() {
       const last = lastRef.current;
       if (last) {
         const dist  = Math.hypot(cx - last.x, cy - last.y);
-        const steps = Math.max(1, Math.ceil(dist / (GRID / 2)));
-        for (let k = 0; k <= steps; k++) {
+        const steps = Math.max(1, Math.ceil(dist / STEP));
+        for (let k = 1; k <= steps; k++) {
           paintAt(
             last.x + (cx - last.x) * (k / steps),
             last.y + (cy - last.y) * (k / steps)
@@ -120,16 +137,16 @@ export default function CursorPaintSection() {
     [paintAt, hasStarted]
   );
 
-  /* Canvas resize + event wiring */
+  /* Canvas size sync + event wiring. */
   useEffect(() => {
-    const canvas  = canvasRef.current;
-    const section = sectionRef.current;
-    if (!canvas || !section) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
     const syncSize = () => {
-      const { width, height } = canvas.getBoundingClientRect();
-      canvas.width  = Math.round(width);
-      canvas.height = Math.round(height);
+      const dpr  = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width  = Math.round(rect.width  * dpr);
+      canvas.height = Math.round(rect.height * dpr);
     };
 
     syncSize();
@@ -160,7 +177,6 @@ export default function CursorPaintSection() {
 
   return (
     <section
-      ref={sectionRef}
       id="canvas-art"
       className="relative overflow-hidden"
       data-domain="landing"
@@ -177,16 +193,16 @@ export default function CursorPaintSection() {
         <span
           className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-widest rounded-full border"
           style={{
-            color: "var(--domain-primary)",
+            color:       "var(--domain-primary)",
             borderColor: "var(--domain-primary)",
-            background: "rgba(124, 108, 240, 0.12)",
+            background:  "var(--domain-bg-accent)",
           }}
         >
           Interactive
         </span>
       </motion.div>
 
-      {/* ── Instruction overlay (fades out once painting starts) ── */}
+      {/* Instruction overlay — fades out when painting starts */}
       <motion.div
         className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 pointer-events-none select-none"
         animate={{ opacity: hasStarted ? 0 : 1 }}
@@ -194,47 +210,47 @@ export default function CursorPaintSection() {
       >
         <p
           className="text-sm font-mono tracking-widest uppercase"
-          style={{ color: "rgba(255,255,255,0.40)" }}
+          style={{ color: "var(--muted)" }}
         >
           Move your cursor to paint
         </p>
 
-        {/* Animated cursor dot */}
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-             className="animate-bounce" style={{ animationDuration: "1.6s" }}>
-          <circle cx="16" cy="16" r="12" stroke="rgba(124,108,240,0.45)" strokeWidth="1.5" />
-          <circle cx="16" cy="16" r="4"  fill ="rgba(124,108,240,0.65)" />
+        {/* Pulsing cursor ring */}
+        <svg
+          width="34" height="34" viewBox="0 0 34 34" fill="none"
+          className="animate-bounce" style={{ animationDuration: "1.6s" }}
+        >
+          <circle cx="17" cy="17" r="13" stroke="var(--domain-primary)" strokeOpacity="0.4" strokeWidth="1.5" />
+          <circle cx="17" cy="17" r="4"  fill="var(--domain-primary)" fillOpacity="0.7" />
         </svg>
 
         <p
           className="text-xs font-mono"
-          style={{ color: "rgba(255,255,255,0.22)" }}
+          style={{ color: "var(--border)" }}
         >
           A message is hidden inside
         </p>
       </motion.div>
 
-      {/* ── Bottom label (always visible) ── */}
-      <div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-none select-none text-center"
-      >
+      {/* Bottom label */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-none select-none text-center">
         <p
           className="text-xs font-mono tracking-widest uppercase"
-          style={{ color: "rgba(255,255,255,0.18)" }}
+          style={{ color: "var(--border)" }}
         >
           Luxmikant · 2025
         </p>
       </div>
 
-      {/* ── The canvas ── */}
+      {/* Canvas */}
       <canvas
         ref={canvasRef}
         className="block w-full"
         style={{
-          height: "clamp(360px, 50vh, 520px)",
-          cursor: "crosshair",
+          height:      "clamp(360px, 50vh, 520px)",
+          cursor:      "crosshair",
           touchAction: "none",
-          display: "block",
+          display:     "block",
         }}
       />
     </section>
