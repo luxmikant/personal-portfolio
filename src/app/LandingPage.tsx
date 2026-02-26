@@ -11,6 +11,7 @@ import SkillsSection from "@/components/Sections/SkillsSection";
 import RecommendationsSection from "@/components/Sections/RecommendationsSection";
 import FooterSection from "@/components/Sections/FooterSection";
 import ScrollAvatar from "@/components/Avatar3D/ScrollAvatar";
+import CursorPaintSection from "@/components/Sections/CursorPaintSection";
 
 export default function LandingPage() {
   // Fix hydration: read sessionStorage only in useEffect
@@ -69,7 +70,10 @@ export default function LandingPage() {
           {/* 5. Skills */}
           <SkillsSection />
 
-          {/* 6. Engineering Philosophy */}
+          {/* 6. Interactive Canvas Art */}
+          <CursorPaintSection />
+
+          {/* 7. Engineering Philosophy */}
           <RecommendationsSection />
 
           {/* 7. Footer / Contact */}
