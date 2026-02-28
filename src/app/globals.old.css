@@ -1,0 +1,324 @@
+/* ============================================
+   PORTFOLIO GLOBAL STYLES — Light Theme
+   ============================================ */
+@import "tailwindcss";
+
+/* ============================================
+   BASE THEME — Warm, Clean, Premium
+   ============================================ */
+:root {
+  /* Base colors — warm off-white */
+  --background: #faf9f7;
+  --foreground: #1a1a2e;
+  --surface: #ffffff;
+  --surface-light: #f5f3ef;
+  --border: #e5e2db;
+  --muted: #7a7a8c;
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Active domain (set dynamically) */
+  --domain-primary: #7c6cf0;
+  --domain-secondary: #a78bfa;
+  --domain-glow: rgba(124, 108, 240, 0.18);
+
+  /* Animation tokens */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 600ms ease;
+  --transition-domain: 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Scroll progress */
+  --scroll-progress: 0;
+}
+
+/* ============================================
+   DOMAIN COLOR THEMES (CSS Custom Properties)
+   Softer, pastel-tinted accents for light bg
+   ============================================ */
+
+/* Landing — Soft violet */
+[data-domain="landing"] {
+  --domain-primary: #7c6cf0;
+  --domain-secondary: #b4a0fa;
+  --domain-glow: rgba(124, 108, 240, 0.15);
+  --domain-bg-accent: rgba(124, 108, 240, 0.06);
+}
+
+/* Backend Engineering — Lavender violet */
+[data-domain="backend"] {
+  --domain-primary: #7c6cf0;
+  --domain-secondary: #b4a0fa;
+  --domain-glow: rgba(124, 108, 240, 0.15);
+  --domain-bg-accent: rgba(124, 108, 240, 0.06);
+}
+
+/* Cloud-Native — Warm amber */
+[data-domain="cloud"] {
+  --domain-primary: #e88c3a;
+  --domain-secondary: #f5b070;
+  --domain-glow: rgba(232, 140, 58, 0.15);
+  --domain-bg-accent: rgba(232, 140, 58, 0.06);
+}
+
+/* AI Tools — Soft teal */
+[data-domain="ai"] {
+  --domain-primary: #2bb58e;
+  --domain-secondary: #e07cad;
+  --domain-glow: rgba(43, 181, 142, 0.15);
+  --domain-bg-accent: rgba(43, 181, 142, 0.06);
+}
+
+/* Web3 — Soft purple + warm gold */
+[data-domain="web3"] {
+  --domain-primary: #9b6ef0;
+  --domain-secondary: #e5a820;
+  --domain-glow: rgba(155, 110, 240, 0.15);
+  --domain-bg-accent: rgba(155, 110, 240, 0.06);
+}
+
+/* ============================================
+   TAILWIND THEME INLINE
+   ============================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-domain-primary: var(--domain-primary);
+  --color-domain-secondary: var(--domain-secondary);
+  --color-domain-glow: var(--domain-glow);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid var(--domain-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.3rem, 3vw, 2rem); }
+
+p {
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Domain glow effect — softer for light theme */
+.domain-glow {
+  box-shadow: 0 0 20px var(--domain-glow),
+              0 0 40px var(--domain-glow);
+}
+
+.domain-glow-text {
+  text-shadow: 0 0 15px var(--domain-glow);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--domain-primary), var(--domain-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass panel — light frosted glass */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  height: 2px;
+  z-index: 49;
+  background: linear-gradient(90deg, #7c6cf0, #e88c3a, #2bb58e, #9b6ef0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* ============================================
+   LOADER STYLES
+   ============================================ */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+}
+
+/* ============================================
+   ANIMATION KEYFRAMES
+   ============================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--domain-glow);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--domain-glow), 0 0 50px var(--domain-glow);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.03) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.45rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+  opacity: 0.5;
+}
+
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-fade-in-up,
+  .animate-shimmer {
+    animation: none !important;
+  }
+}
