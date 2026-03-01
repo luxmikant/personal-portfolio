@@ -3,6 +3,15 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import ContentReveal from "@/components/Effects/ContentReveal";
+import { PROJECTS } from "@/utils/projectData";
+
+const DOMAIN_LABELS: Record<string, string> = {
+  backend: "Backend",
+  cloud: "Cloud-Native",
+  ai: "AI / ML",
+  web3: "Web3",
+  frontend: "Frontend",
+};
 
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -26,7 +35,7 @@ export default function ProjectsSection() {
         <ContentReveal delay={0.2}>
           <div className="projects-intro">
             <h2 className="projects-heading">
-              My interest lies in the <span className="text-accent">core domain</span> —
+              My interest lies in the <span className="text-accent">core domain</span> \u2014
               I am relentless and want to do work in the real world.
             </h2>
             <p className="projects-subtext">
@@ -37,9 +46,9 @@ export default function ProjectsSection() {
           </div>
         </ContentReveal>
 
-        {/* Project cards placeholder — will be populated with real data */}
+        {/* Real project cards */}
         <div className="projects-grid">
-          {PLACEHOLDER_PROJECTS.map((project, i) => (
+          {PROJECTS.map((project, i) => (
             <motion.div
               key={project.title}
               className="project-card"
@@ -47,7 +56,7 @@ export default function ProjectsSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
                 duration: 0.6,
-                delay: 0.3 + i * 0.12,
+                delay: 0.3 + i * 0.1,
                 ease: [0.16, 1, 0.3, 1],
               }}
               whileHover={{ y: -6, transition: { duration: 0.3 } }}
@@ -56,69 +65,71 @@ export default function ProjectsSection() {
                 <span className="project-card-number">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="project-card-tag">{project.tag}</span>
+                <span className="project-card-tag">
+                  {DOMAIN_LABELS[project.domain] ?? project.domain}
+                </span>
               </div>
+
               <h3 className="project-card-title">{project.title}</h3>
               <p className="project-card-desc">{project.description}</p>
+
+              {/* Top 3 highlights */}
+              <ul className="project-card-highlights">
+                {project.highlights.slice(0, 3).map((h) => (
+                  <li key={h} className="project-highlight-item">
+                    <span className="project-highlight-dot">&#9658;</span>
+                    {h}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech stack */}
               <div className="project-card-tech">
-                {project.tech.map((t) => (
+                {project.techStack.map((t) => (
                   <span key={t} className="project-tech-pill">
                     {t}
                   </span>
                 ))}
               </div>
+
+              {/* Links */}
+              {(project.liveUrl || project.github) && (
+                <div className="project-card-links">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link project-link-live"
+                    >
+                      Live &#x2197;
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link project-link-github"
+                    >
+                      GitHub &#x2197;
+                    </a>
+                  )}
+                </div>
+              )}
+
               {/* Chess knight hover indicator */}
               <motion.div
                 className="project-card-knight"
                 initial={{ opacity: 0, scale: 0.5 }}
-                whileHover={{ opacity: 0.2, scale: 1     }}
+                whileHover={{ opacity: 0.2, scale: 1 }}
               >
-                ♞
+                &#9822;
               </motion.div>
             </motion.div>
           ))}
         </div>
-
-        <motion.p
-          className="projects-cta-note"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 0.6 } : {}}
-          transition={{ delay: 1 }}
-        >
-          More projects & context coming soon — provide your real project data and I&apos;ll showcase them here.
-        </motion.p>
       </div>
     </section>
   );
 }
-
-const PLACEHOLDER_PROJECTS = [
-  {
-    title: "Scalable Event Pipeline",
-    tag: "Backend",
-    description:
-      "High-throughput event streaming system built with Go and Apache Kafka. Handles millions of events with clean architecture.",
-    tech: ["Go", "Kafka", "PostgreSQL", "Docker"],
-  },
-  {
-    title: "Real-Time Collaboration Engine",
-    tag: "WebSockets",
-    description:
-      "WebSocket-powered real-time system for live collaboration. Bi-directional data flow with minimal latency.",
-    tech: ["Node.js", "WebSocket", "Redis", "React"],
-  },
-  {
-    title: "Cloud-Native Deployment Platform",
-    tag: "Cloud",
-    description:
-      "Kubernetes-based platform with automated CI/CD, observability, and self-healing infrastructure.",
-    tech: ["Kubernetes", "Terraform", "Prometheus", "ArgoCD"],
-  },
-  {
-    title: "AI-Powered Dev Tooling",
-    tag: "AI",
-    description:
-      "LLM-integrated developer tools — RAG pipelines, code review agents, and intelligent documentation.",
-    tech: ["Python", "LangChain", "OpenAI", "FastAPI"],
-  },
-];

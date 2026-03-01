@@ -19,7 +19,7 @@ export const PROJECTS: Project[] = [
   {
     title: "SharCRM",
     description:
-      "Enterprise-grade AI CRM platform unifying customer data, AI-assisted campaigns, and health insights. Real-time dashboard with glass-morphic UI.",
+      "Modern businesses struggle with fragmented customer data, inefficient campaign management, and lack of actionable insights. We built SharCRM because we believe every business deserves enterprise-grade CRM intelligence, not just Fortune 500 companies.",
     techStack: [
       "React 18",
       "Vite",
@@ -29,14 +29,15 @@ export const PROJECTS: Project[] = [
       "TypeScript",
     ],
     github: "https://github.com/luxmikant/SharCRM",
-    liveUrl: "https://www.sharcrm.app/",
+    liveUrl: "https://frontend-crm-u9i2.onrender.com/",
     domain: "backend",
     highlights: [
       "Live production deployment",
       "AI-generated campaign messages",
       "Smart customer segmentation with drag-and-drop",
-      "Health score tracking (0–100) with churn prediction",
+      "Health score tracking (0\u2013100) with churn prediction",
       "Sales pipeline with Kanban UI",
+      "Design-first collaboration \u2014 mutual appreciation for UI/UX",
     ],
   },
   {
@@ -58,7 +59,7 @@ export const PROJECTS: Project[] = [
     highlights: [
       "95%+ semantic deduplication accuracy",
       "NER entity extraction (92%+ precision)",
-      "Impact Index scoring (0–100)",
+      "Impact Index scoring (0\u2013100)",
       "RAG synthesis with Groq Llama-3.3-70B",
       "134 comprehensive test cases",
     ],
@@ -68,7 +69,7 @@ export const PROJECTS: Project[] = [
   // CLOUD-NATIVE
   // ==========================================
   {
-    title: "Armory Intelligence — The Elite Arsenal Nexus",
+    title: "Armory Intelligence \u2014 The Elite Arsenal Nexus",
     description:
       "Cinematic weapons intelligence platform comparing Star Wars blasters to real-world firearms. AI-powered analysis, holographic displays, and tactical briefings with Tambo Generative UI.",
     techStack: [
@@ -111,7 +112,7 @@ export const PROJECTS: Project[] = [
     domain: "ai",
     highlights: [
       "State machine orchestration across 6 agents",
-      "Agent pipeline: Dedup → NER → Sentiment → Impact → Heatmap → RAG",
+      "Agent pipeline: Dedup \u2192 NER \u2192 Sentiment \u2192 Impact \u2192 Heatmap \u2192 RAG",
       "~88% FinBERT sentiment accuracy",
       "Sector/company attention heatmap",
       "End-to-end test suite with performance benchmarks",
@@ -150,7 +151,7 @@ export const PROJECTS: Project[] = [
   },
 
   // ==========================================
-  // BONUS — Connect4 (Go)
+  // BONUS \u2014 Connect4 (Go)
   // ==========================================
   {
     title: "Connect4",
