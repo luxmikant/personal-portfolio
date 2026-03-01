@@ -784,13 +784,73 @@ p {
   font-size: 0.875rem;
   line-height: 1.65;
   color: var(--muted);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.project-card-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.project-highlight-item {
+  font-size: 0.78rem;
+  color: var(--muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  line-height: 1.5;
+}
+
+.project-highlight-dot {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  font-size: 0.65rem;
+}
+
+.project-card-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.project-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.project-link:hover {
+  opacity: 0.75;
+  transform: translateY(-1px);
+}
+
+.project-link-live {
+  background: var(--accent-primary);
+  color: var(--background);
+}
+
+.project-link-github {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
 }
 
 .project-card-tech {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  margin-top: 0.75rem;
 }
 
 .project-tech-pill {
