@@ -10,6 +10,7 @@ export interface Project {
   domain: DomainId;
   highlights: string[];
   image?: string;
+  video?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -31,13 +32,14 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/luxmikant/SharCRM",
     liveUrl: "https://frontend-crm-u9i2.onrender.com/",
     domain: "backend",
+    image: "/sharcrm.png",
     highlights: [
       "Live production deployment",
       "AI-generated campaign messages",
       "Smart customer segmentation with drag-and-drop",
-      "Health score tracking (0\u2013100) with churn prediction",
+      "Health score tracking (0–100) with churn prediction",
       "Sales pipeline with Kanban UI",
-      "Design-first collaboration \u2014 mutual appreciation for UI/UX",
+      "Design-first collaboration — mutual appreciation for UI/UX",
     ],
   },
   {
@@ -59,7 +61,7 @@ export const PROJECTS: Project[] = [
     highlights: [
       "95%+ semantic deduplication accuracy",
       "NER entity extraction (92%+ precision)",
-      "Impact Index scoring (0\u2013100)",
+      "Impact Index scoring (0–100)",
       "RAG synthesis with Groq Llama-3.3-70B",
       "134 comprehensive test cases",
     ],
@@ -69,7 +71,7 @@ export const PROJECTS: Project[] = [
   // CLOUD-NATIVE
   // ==========================================
   {
-    title: "Armory Intelligence \u2014 The Elite Arsenal Nexus",
+    title: "Armory Intelligence — The Elite Arsenal Nexus",
     description:
       "Cinematic weapons intelligence platform comparing Star Wars blasters to real-world firearms. AI-powered analysis, holographic displays, and tactical briefings with Tambo Generative UI.",
     techStack: [
@@ -112,7 +114,7 @@ export const PROJECTS: Project[] = [
     domain: "ai",
     highlights: [
       "State machine orchestration across 6 agents",
-      "Agent pipeline: Dedup \u2192 NER \u2192 Sentiment \u2192 Impact \u2192 Heatmap \u2192 RAG",
+      "Agent pipeline: Dedup → NER → Sentiment → Impact → Heatmap → RAG",
       "~88% FinBERT sentiment accuracy",
       "Sector/company attention heatmap",
       "End-to-end test suite with performance benchmarks",
@@ -151,7 +153,7 @@ export const PROJECTS: Project[] = [
   },
 
   // ==========================================
-  // BONUS \u2014 Connect4 (Go)
+  // BONUS — Connect4 (Go)
   // ==========================================
   {
     title: "Connect4",
@@ -160,6 +162,7 @@ export const PROJECTS: Project[] = [
     techStack: ["Go", "Architecture Documentation"],
     github: "https://github.com/luxmikant/Connect4",
     domain: "backend",
+    video: "/connect4.mp4",
     highlights: [
       "Clean Go architecture",
       "Living architecture snapshot documentation",

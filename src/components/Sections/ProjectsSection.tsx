@@ -35,7 +35,7 @@ export default function ProjectsSection() {
         <ContentReveal delay={0.2}>
           <div className="projects-intro">
             <h2 className="projects-heading">
-              My interest lies in the <span className="text-accent">core domain</span> \u2014
+              My interest lies in the <span className="text-accent">core domain</span> —
               I am relentless and want to do work in the real world.
             </h2>
             <p className="projects-subtext">
@@ -59,72 +59,112 @@ export default function ProjectsSection() {
                 delay: 0.3 + i * 0.1,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
+              whileHover="hover"
+              variants={{
+                initial: { y: 0 },
+                hover: { y: -6, transition: { duration: 0.3 } }
+              }}
             >
-              <div className="project-card-header">
-                <span className="project-card-number">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="project-card-tag">
-                  {DOMAIN_LABELS[project.domain] ?? project.domain}
-                </span>
-              </div>
-
-              <h3 className="project-card-title">{project.title}</h3>
-              <p className="project-card-desc">{project.description}</p>
-
-              {/* Top 3 highlights */}
-              <ul className="project-card-highlights">
-                {project.highlights.slice(0, 3).map((h) => (
-                  <li key={h} className="project-highlight-item">
-                    <span className="project-highlight-dot">&#9658;</span>
-                    {h}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Tech stack */}
-              <div className="project-card-tech">
-                {project.techStack.map((t) => (
-                  <span key={t} className="project-tech-pill">
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              {/* Links */}
-              {(project.liveUrl || project.github) && (
-                <div className="project-card-links">
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link project-link-live"
-                    >
-                      Live &#x2197;
-                    </a>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link project-link-github"
-                    >
-                      GitHub &#x2197;
-                    </a>
-                  )}
-                </div>
+              {/* Optional Background Media */}
+              {(project.image || project.video) && (
+                <motion.div 
+                  className="project-card-media"
+                  initial="initial"
+                  variants={{
+                    initial: { opacity: 0, scale: 1.05 },
+                    hover: { opacity: 1, scale: 1 }
+                  }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                >
+                  <div className="project-card-media-overlay" />
+                  {project.video ? (
+                    <video
+                      src={project.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="project-card-video"
+                    />
+                  ) : project.image ? (
+                    <img 
+                      src={project.image}
+                      alt={`${project.title} background`}
+                      className="project-card-img"
+                    />
+                  ) : null}
+                </motion.div>
               )}
+
+              <div className="project-card-content">
+                <div className="project-card-header">
+                  <span className="project-card-number">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="project-card-tag">
+                    {DOMAIN_LABELS[project.domain] ?? project.domain}
+                  </span>
+                </div>
+
+                <h3 className="project-card-title">{project.title}</h3>
+                <p className="project-card-desc">{project.description}</p>
+
+                {/* Top 3 highlights */}
+                <ul className="project-card-highlights">
+                  {project.highlights.slice(0, 3).map((h) => (
+                    <li key={h} className="project-highlight-item">
+                      <span className="project-highlight-dot">▸</span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tech stack */}
+                <div className="project-card-tech">
+                  {project.techStack.map((t) => (
+                    <span key={t} className="project-tech-pill">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                {(project.liveUrl || project.github) && (
+                  <div className="project-card-links">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link project-link-live"
+                      >
+                        Live ↗
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link project-link-github"
+                      >
+                        GitHub ↗
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
 
               {/* Chess knight hover indicator */}
               <motion.div
                 className="project-card-knight"
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileHover={{ opacity: 0.2, scale: 1 }}
+                initial="initial"
+                variants={{
+                  initial: { opacity: 0, scale: 0.5 },
+                  hover: { opacity: 0.2, scale: 1 }
+                }}
               >
-                &#9822;
+                ♞
               </motion.div>
             </motion.div>
           ))}
