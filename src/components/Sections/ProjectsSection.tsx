@@ -47,34 +47,34 @@ export default function ProjectsSection() {
         </ContentReveal>
 
         {/* Real project cards */}
-        <div className="projects-grid">
+        <div className="projects-grid" style={{ perspective: 1200 }}>
           {PROJECTS.map((project, i) => (
             <motion.div
               key={project.title}
               className="project-card"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, y: 50, rotateX: 10, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{
-                duration: 0.6,
-                delay: 0.3 + i * 0.1,
+                duration: 0.8,
+                delay: 0.2 + i * 0.15,
                 ease: [0.16, 1, 0.3, 1],
               }}
               whileHover="hover"
               variants={{
                 initial: { y: 0 },
-                hover: { y: -6, transition: { duration: 0.3 } }
+                hover: { y: -8, transition: { duration: 0.4, ease: "easeOut" } }
               }}
             >
               {/* Optional Background Media */}
               {(project.image || project.video) && (
                 <motion.div 
                   className="project-card-media"
-                  initial="initial"
                   variants={{
-                    initial: { opacity: 0, scale: 1.05 },
-                    hover: { opacity: 1, scale: 1 }
+                    initial: { scale: 1 },
+                    hover: { scale: 1.05 }
                   }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="project-card-media-overlay" />
                   {project.video ? (
@@ -89,7 +89,7 @@ export default function ProjectsSection() {
                   ) : project.image ? (
                     <img 
                       src={project.image}
-                      alt={`${project.title} background`}
+                      alt={`${project.title} screenshot`}
                       className="project-card-img"
                     />
                   ) : null}
