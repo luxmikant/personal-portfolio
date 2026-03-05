@@ -21,6 +21,7 @@ export const PROJECTS: Project[] = [
       "Two-player strategy game built in Go with documented architecture. Demonstrates clean code practices, game logic, and living documentation.",
     techStack: ["Go", "Architecture Documentation"],
     github: "https://github.com/luxmikant/Connect4",
+    liveUrl: "https://connect4-jet-chi.vercel.app/",
     domain: "backend",
     video: "/connect4.mp4",
     highlights: [
