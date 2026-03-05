@@ -14,9 +14,24 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
-  // ==========================================
-  // BACKEND ENGINEERING
-  // ==========================================
+  // 1 — Connect4
+  {
+    title: "Connect4",
+    description:
+      "Two-player strategy game built in Go with documented architecture. Demonstrates clean code practices, game logic, and living documentation.",
+    techStack: ["Go", "Architecture Documentation"],
+    github: "https://github.com/luxmikant/Connect4",
+    domain: "backend",
+    video: "/connect4.mp4",
+    highlights: [
+      "Clean Go architecture",
+      "Living architecture snapshot documentation",
+      "Game state management & logic",
+      "Well-structured codebase",
+    ],
+  },
+
+  // 2 — SharCRM
   {
     title: "SharCRM",
     description:
@@ -39,37 +54,10 @@ export const PROJECTS: Project[] = [
       "Smart customer segmentation with drag-and-drop",
       "Health score tracking (0–100) with churn prediction",
       "Sales pipeline with Kanban UI",
-      "Design-first collaboration — mutual appreciation for UI/UX",
-    ],
-  },
-  {
-    title: "TraderLens-AI",
-    description:
-      "Multi-agent financial news intelligence system for real-time market analysis. 6-agent LangGraph pipeline with state machine orchestration.",
-    techStack: [
-      "Python",
-      "LangGraph",
-      "FastAPI",
-      "ChromaDB",
-      "PostgreSQL",
-      "FinBERT",
-      "React",
-      "TypeScript",
-    ],
-    github: "https://github.com/luxmikant/TraderLens-AI",
-    domain: "backend",
-    highlights: [
-      "95%+ semantic deduplication accuracy",
-      "NER entity extraction (92%+ precision)",
-      "Impact Index scoring (0–100)",
-      "RAG synthesis with Groq Llama-3.3-70B",
-      "134 comprehensive test cases",
     ],
   },
 
-  // ==========================================
-  // CLOUD-NATIVE
-  // ==========================================
+  // 3 — Armory Intelligence
   {
     title: "Armory Intelligence — The Elite Arsenal Nexus",
     description:
@@ -86,88 +74,13 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/luxmikant/Armory-Intelligence",
     liveUrl: "https://armory-intelligence.vercel.app/",
     domain: "cloud",
+    image: "/armory.png",
     highlights: [
       "19 weapons (Sci-Fi + Real World) with detailed specs",
       "11 custom AI components via Tambo Generative UI",
       "Ballistics calculator with trajectory modeling",
       "Real-time AI comparisons & tactical analysis",
-      "Cinematic UI with scroll-driven animations",
       "Production deployment on Vercel",
-    ],
-  },
-
-  // ==========================================
-  // AI TOOLS & COPILOTS
-  // ==========================================
-  {
-    title: "TraderLens-AI (Agent Focus)",
-    description:
-      "6-agent LangGraph pipeline demonstrating production multi-agent orchestration. Semantic deduplication, NER extraction, FinBERT sentiment, and RAG synthesis.",
-    techStack: [
-      "LangGraph",
-      "Python",
-      "FinBERT",
-      "ChromaDB",
-      "Groq Llama-3.3-70B",
-    ],
-    github: "https://github.com/luxmikant/TraderLens-AI",
-    domain: "ai",
-    highlights: [
-      "State machine orchestration across 6 agents",
-      "Agent pipeline: Dedup → NER → Sentiment → Impact → Heatmap → RAG",
-      "~88% FinBERT sentiment accuracy",
-      "Sector/company attention heatmap",
-      "End-to-end test suite with performance benchmarks",
-    ],
-  },
-  {
-    title: "ANPR-YOLOv8",
-    description:
-      "Automated Number Plate Recognition using YOLOv8 object detection. Real-world computer vision application for plate detection and OCR.",
-    techStack: ["Python", "YOLOv8", "OpenCV", "Ultralytics"],
-    github: "https://github.com/luxmikant/ANPR-Yolov8",
-    domain: "ai",
-    highlights: [
-      "YOLOv8-based plate detection",
-      "Real-time processing pipeline",
-      "OCR integration for plate text extraction",
-      "Practical, deployable CV application",
-    ],
-  },
-
-  // ==========================================
-  // WEB3
-  // ==========================================
-  {
-    title: "specchain-pro",
-    description:
-      "Blockchain experimentation project exploring smart contract patterns and on-chain architecture fundamentals.",
-    techStack: ["TypeScript", "Blockchain", "Smart Contracts"],
-    github: "https://github.com/luxmikant/specchain-pro",
-    domain: "web3",
-    highlights: [
-      "Smart contract design patterns",
-      "On-chain vs off-chain architecture exploration",
-      "Foundation for hybrid cloud-chain systems",
-    ],
-  },
-
-  // ==========================================
-  // BONUS — Connect4 (Go)
-  // ==========================================
-  {
-    title: "Connect4",
-    description:
-      "Two-player strategy game built in Go with documented architecture. Demonstrates clean code practices, game logic, and living documentation.",
-    techStack: ["Go", "Architecture Documentation"],
-    github: "https://github.com/luxmikant/Connect4",
-    domain: "backend",
-    video: "/connect4.mp4",
-    highlights: [
-      "Clean Go architecture",
-      "Living architecture snapshot documentation",
-      "Game state management & logic",
-      "Well-structured codebase",
     ],
   },
 ];

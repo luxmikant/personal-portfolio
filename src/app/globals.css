@@ -741,7 +741,7 @@ p {
   flex-direction: column;
   justify-content: center;
   border-top: 1px solid var(--border);
-  overflow: hidden;
+  /* NOTE: no overflow:hidden here — it breaks position:sticky in Chrome/Safari */
 }
 
 /* ── Two-column inner grid ── */
@@ -754,6 +754,7 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 3rem;
+  overflow: hidden;
 }
 
 /* ── Left: text content ── */
@@ -867,6 +868,10 @@ p {
   box-shadow: 0 28px 64px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--border);
   background: var(--surface-light);
+  /* Prevent the frame from ever being taller than the viewport */
+  max-height: calc(100dvh - 8rem);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Fake browser chrome bar */
@@ -901,8 +906,9 @@ p {
 
 .sticky-media-body {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .sticky-media-asset {
