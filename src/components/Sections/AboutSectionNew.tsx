@@ -4,10 +4,30 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const TRAITS = [
-  { icon: "♟", label: "Chess Thinker" },
-  { icon: "⛰", label: "Mountain Native" },
-  { icon: "⚙", label: "System Builder" },
-  { icon: "🔁", label: "Relentless Learner" },
+  {
+    icon: "♟",
+    label: "Chess Thinker",
+    desc: "Strategic by instinct, patient under pressure.",
+    rotate: -2,
+  },
+  {
+    icon: "⛰",
+    label: "Mountain Native",
+    desc: "Raised in the Himalayas, grounded in perspective.",
+    rotate: 1.5,
+  },
+  {
+    icon: "⚙",
+    label: "System Builder",
+    desc: "Full-stack ownership from schema to deployment.",
+    rotate: -1,
+  },
+  {
+    icon: "🔁",
+    label: "Relentless Learner",
+    desc: "Pick the right tool. Master it. Push it further.",
+    rotate: 2,
+  },
 ];
 
 export default function AboutSectionNew() {
@@ -29,7 +49,7 @@ export default function AboutSectionNew() {
         </motion.div>
 
         <div className="about-grid">
-          {/* Left - Personal Story */}
+          {/* Left — Personal Story */}
           <motion.div
             className="about-story"
             initial={{ opacity: 0, y: 40 }}
@@ -65,40 +85,47 @@ export default function AboutSectionNew() {
             </p>
           </motion.div>
 
-          {/* Right - Trait cards */}
-          <motion.div
-            className="about-traits"
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
+          {/* Right — Trait cards (glassmorphism + slight rotations) */}
+          <div className="about-traits">
             {TRAITS.map((trait, i) => (
               <motion.div
                 key={trait.label}
                 className="about-trait-card"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.5 + i * 0.1 }}
-                whileHover={{ scale: 1.05, y: -4 }}
+                initial={{ opacity: 0, scale: 0.88, rotate: trait.rotate * 0.4 }}
+                animate={
+                  isInView ? { opacity: 1, scale: 1, rotate: trait.rotate } : {}
+                }
+                transition={{
+                  delay: 0.5 + i * 0.12,
+                  duration: 0.65,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={{
+                  scale: 1.06,
+                  rotate: 0,
+                  y: -6,
+                  transition: { duration: 0.22 },
+                }}
               >
                 <span className="trait-icon">{trait.icon}</span>
                 <span className="trait-label">{trait.label}</span>
+                <span className="trait-desc">{trait.desc}</span>
               </motion.div>
             ))}
 
             {/* Philosophy quote */}
             <motion.blockquote
               className="about-quote"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.9 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.05 }}
             >
               <span className="quote-mark">&ldquo;</span>
               I utilize the need of the tool as I go on, find out it&apos;s
               the perfect one, and keep mastering it — on and on.
               <span className="quote-mark">&rdquo;</span>
             </motion.blockquote>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
