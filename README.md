@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Luxmikant Portfolio
 
-## Getting Started
+Interactive single-page portfolio focused on Backend, Cloud, AI, and Web3.
+Built with a storytelling scroll flow, cinematic motion, and a scroll-linked 3D avatar.
 
-First, run the development server:
+## Highlights
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Single-page storytelling flow: Hero -> About -> Domains -> Projects -> Skills -> Philosophy -> Contact
+- Scroll-linked 3D avatar that morphs by domain
+- Canvas-based GlowingGrid background for better performance
+- Warm light visual theme with domain-aware color accents
+- Smooth scrolling and section-aware navigation
+- SEO metadata, `robots.txt`, and sitemap support
+
+## Tech Stack
+
+- Next.js 16 (App Router) + React 19 + TypeScript
+- Tailwind CSS v4
+- Framer Motion + React Spring
+- Three.js + React Three Fiber + Drei
+- Lenis smooth scrolling
+
+## Project Structure
+
+```text
+src/
+	app/
+		LandingPage.tsx
+		page.tsx
+		layout.tsx
+	components/
+		Avatar3D/
+		GlowingGrid/
+		Navigation/
+		ProjectCard/
+		Sections/
+	utils/
+		animationConfig.ts
+		domainConfig.ts
+		projectData.ts
+		siteConfig.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open `http://localhost:3000`.
 
-## Learn More
+## Build and Verify
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Configuration Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Site metadata and canonical base URL: `src/utils/siteConfig.ts`
+- Domain colors and order: `src/utils/domainConfig.ts`
+- Project content: `src/utils/projectData.ts`
+- Contact CTA (Typeform): `src/components/Sections/FooterSection.tsx`
 
-## Deploy on Vercel
+## Documentation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Project planning and progress notes are available in `docs/`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `docs/PLAN.md`
+- `docs/REQUIREMENTS.md`
+- `docs/TASKS.md`
+- `docs/TECHNICAL_DECISIONS.md`
+- `docs/DEV_LOGS.md`
+- `docs/PROGRESS.md`
