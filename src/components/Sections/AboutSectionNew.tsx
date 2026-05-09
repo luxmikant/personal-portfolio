@@ -60,12 +60,12 @@ export default function AboutSectionNew() {
               Computer Science <span className="text-accent">Graduate</span>
             </h2>
 
-            {/* Academic Stats */}
+            {/* Certification Stats */}
             <div className="mb-6 p-4 rounded-lg border border-amber-200 bg-amber-50">
               <span className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-sm font-semibold">
-                B.Tech in Computer Science
+                Certified Professional
               </span>
-              <p className="mt-2 text-base font-semibold text-foreground">CGPA: 8.42</p>
+              <p className="mt-2 text-base font-semibold text-foreground">Introduction to DevOps and Site Reliability Engineering LFS162</p>
             </div>
 
             <p className="about-para">

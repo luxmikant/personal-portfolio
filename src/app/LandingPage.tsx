@@ -7,6 +7,7 @@ import HeroSectionNew from "@/components/Sections/HeroSectionNew";
 import AboutSectionNew from "@/components/Sections/AboutSectionNew";
 import ProjectsSection from "@/components/Sections/ProjectsSection";
 import HackathonsSection from "@/components/Sections/HackathonsSection";
+import SkillsSection from "@/components/Sections/SkillsSection";
 import ConnectSection from "@/components/Sections/ConnectSection";
 
 export default function LandingPage() {
@@ -48,7 +49,13 @@ export default function LandingPage() {
           {/* Divider */}
           <div className="section-divider" />
 
-          {/* 3. Projects */}
+          {/* 3. Skills */}
+          <SkillsSection />
+
+          {/* Divider */}
+          <div className="section-divider" />
+
+          {/* 4. Projects */}
           <ProjectsSection />
 
           {/* 4. Hackathons */}
