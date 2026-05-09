@@ -1,16 +1,20 @@
 # Luxmikant Portfolio
 
-Interactive single-page portfolio focused on Backend, Cloud, AI, and Web3.
-Built with a storytelling scroll flow, cinematic motion, and a scroll-linked 3D avatar.
+[![DevOps and Site Reliability Engineering](https://img.shields.io/badge/Certified-DevOps%20%26%20SRE%20%28LFS162%29-blue?style=for-the-badge&logo=linux&logoColor=white)](https://www.credly.com/badges)
 
-## Highlights
+**CGPA: 8.42** | Interactive single-page portfolio focused on Backend, Cloud, AI, and Web3.
 
-- Single-page storytelling flow: Hero -> About -> Domains -> Projects -> Skills -> Philosophy -> Contact
-- Scroll-linked 3D avatar that morphs by domain
-- Canvas-based GlowingGrid background for better performance
-- Warm light visual theme with domain-aware color accents
-- Smooth scrolling and section-aware navigation
-- SEO metadata, `robots.txt`, and sitemap support
+Built with a storytelling scroll flow, cinematic motion, and a scroll-linked 3D avatar. Modern, performant, and visually immersive.
+
+## ✨ Highlights
+
+- **Single-page storytelling flow**: Hero → About → Domains → Projects → Skills → Philosophy → Contact
+- **Scroll-linked 3D avatar** that morphs intelligently by domain
+- **Canvas-based GlowingGrid** background for optimal performance
+- **Modern visual design** with warm light theme and domain-aware color accents
+- **Smooth scrolling & interactions** powered by Lenis & Framer Motion
+- **Fully responsive** and SEO-optimized with metadata, `robots.txt`, and sitemap
+- **DevOps & SRE certified** infrastructure-ready architecture
 
 ## Tech Stack
 

@@ -1,31 +1,31 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const TRAITS = [
   {
-    icon: "♟",
-    label: "Chess Thinker",
-    desc: "Strategic by instinct, patient under pressure.",
+    icon: "💻",
+    label: "Languages",
+    desc: "TypeScript, JavaScript, Python, Go, Java.",
     rotate: -2,
   },
   {
-    icon: "⛰",
-    label: "Mountain Native",
-    desc: "Raised in the Himalayas, grounded in perspective.",
+    icon: "⚡",
+    label: "Frameworks",
+    desc: "Next.js, React, Node.js, Express, FastAPI.",
     rotate: 1.5,
   },
   {
-    icon: "⚙",
-    label: "System Builder",
-    desc: "Full-stack ownership from schema to deployment.",
+    icon: "☁️",
+    label: "Cloud & DevOps",
+    desc: "AWS, Vercel, Docker, CI/CD pipelines.",
     rotate: -1,
   },
   {
-    icon: "🔁",
-    label: "Relentless Learner",
-    desc: "Pick the right tool. Master it. Push it further.",
+    icon: "🧠",
+    label: "Databases & AI",
+    desc: "PostgreSQL, MongoDB, Supabase, LLMs.",
     rotate: 2,
   },
 ];
@@ -49,7 +49,7 @@ export default function AboutSectionNew() {
         </motion.div>
 
         <div className="about-grid">
-          {/* Left — Personal Story */}
+          {/* Left — Job Readiness Story */}
           <motion.div
             className="about-story"
             initial={{ opacity: 0, y: 40 }}
@@ -57,31 +57,27 @@ export default function AboutSectionNew() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="about-heading">
-              Born in <span className="text-accent">2003</span>,
-              <br />
-              a <span className="text-accent">Kullu</span> (Phari) native.
+              Computer Science <span className="text-accent">Graduate</span>
             </h2>
 
+            {/* Academic Stats */}
+            <div className="mb-6 p-4 rounded-lg border border-amber-200 bg-amber-50">
+              <span className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-sm font-semibold">
+                B.Tech in Computer Science
+              </span>
+              <p className="mt-2 text-base font-semibold text-foreground">CGPA: 8.42</p>
+            </div>
+
             <p className="about-para">
-              With a love for chess, family, friends, tech and innovation. As a
-              passionate developer with a keen eye for detail and a robust
-              background in business and underlying technology, I thrive on
-              crafting innovative software solutions.
+              As a full-stack and cloud-native engineer, I bridge the gap between elegant user interfaces and robust scalable backend architectures. I specialize in building serverless APIs, optimizing database operations, and integrating AI functionality into real-world applications.
             </p>
 
             <p className="about-para">
-              Over the academics, I have honed my expertise and hands-on
-              experience in JavaScript and a variety of modern technologies,
-              enabling me to spearhead complex projects and learn from
-              experienced developers. With a dedication to continuous learning
-              and a commitment to excellence, I transform ideas into scalable,
-              efficient, and user-friendly applications.
+              I am actively seeking Software Engineering roles where I can leverage my proficiency in modern frameworks and cloud tools. I thrive in environments that challenge me to solve complex problems and build systems that scale efficiently.
             </p>
 
             <p className="about-para about-para-highlight">
-              I don&apos;t just pick up tools — I find the right one for the job,
-              master it deeply, and push it further than expected. I take
-              ownership. Every project I touch, I treat as my own.
+              I take end-to-end ownership of my work. From designing initial database schemas to configuring CI/CD pipelines, I ensure high performance and maintainable code quality at every layer.
             </p>
           </motion.div>
 
@@ -112,19 +108,6 @@ export default function AboutSectionNew() {
                 <span className="trait-desc">{trait.desc}</span>
               </motion.div>
             ))}
-
-            {/* Philosophy quote */}
-            <motion.blockquote
-              className="about-quote"
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 1.05 }}
-            >
-              <span className="quote-mark">&ldquo;</span>
-              I utilize the need of the tool as I go on, find out it&apos;s
-              the perfect one, and keep mastering it — on and on.
-              <span className="quote-mark">&rdquo;</span>
-            </motion.blockquote>
           </div>
         </div>
       </div>

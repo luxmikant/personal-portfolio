@@ -195,12 +195,25 @@ export default function ConnectSection() {
               <span className="connect-link-arrow">↗</span>
             </a>
             <a
-              href="mailto:contact@luxmikant.dev"
+              href="mailto:kantgarg2254@gmail.com"
               className="connect-link connect-link-dark"
             >
               <span className="connect-link-label">Email</span>
               <span className="connect-link-arrow">✉</span>
             </a>
+            <a
+              href="https://github.com/luxmikant/res/blob/main/Ai_intern_VIT_LUXMIKANT_7018209392.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="connect-link connect-link-dark"
+            >
+              <span className="connect-link-label">Download CV</span>
+              <span className="connect-link-arrow">↗</span>
+            </a>
+            <div className="connect-link connect-link-dark" style={{ cursor: 'default' }}>
+              <span className="connect-link-label">Chandigarh, India</span>
+              <span className="connect-link-arrow">📍</span>
+            </div>
           </motion.div>
 
           {/* Credit */}

@@ -22,13 +22,14 @@ const SKILLS_DATA: Record<DomainId, Skill[]> = {
     { name: "Clean Code & Testing", level: 85 },
   ],
   cloud: [
-    { name: "Docker", level: 80 },
-    { name: "Kubernetes", level: 60 },
+    { name: "Docker & Containerization", level: 80 },
+    { name: "Kubernetes Orchestration", level: 60 },
+    { name: "DevOps & SRE Practices", level: 82 },
     { name: "CI/CD Pipelines", level: 75 },
     { name: "Prometheus / Grafana", level: 55 },
     { name: "Vercel / Cloud Deploy", level: 85 },
     { name: "Infrastructure Design", level: 65 },
-    { name: "Observability", level: 60 },
+    { name: "Observability & Monitoring", level: 75 },
     { name: "Supabase / BaaS", level: 80 },
   ],
   ai: [

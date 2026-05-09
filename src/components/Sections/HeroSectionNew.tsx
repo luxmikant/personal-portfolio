@@ -5,11 +5,8 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import HimalayanParallax from "@/components/Parallax/HimalayanParallax";
 
 const ROLES = [
-  "Backend Engineer",
-  "System Thinker",
-  "Tool Builder",
-  "Relentless Learner",
-  "Chess Player",
+  "Computer Science Graduate",
+  "Backend + Cloud + AI Engineer"
 ];
 
 export default function HeroSectionNew() {
@@ -87,7 +84,6 @@ export default function HeroSectionNew() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
         >
-          <span className="hero-role-prefix">A</span>
           <div className="hero-role-slider">
             <motion.span
               key={roleIndex}
@@ -109,9 +105,7 @@ export default function HeroSectionNew() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.9 }}
         >
-          I build systems that scale, tools that matter, and I take full
-          ownership of every line of code I write. I don&apos;t just use
-          tools — I find the right one, master it, and push it to its limits.
+          I design <span className="inline-block px-2 py-1 rounded bg-amber-100 text-amber-900 font-semibold">scalable backend architectures</span>, integrate <span className="inline-block px-2 py-1 rounded bg-amber-100 text-amber-900 font-semibold">AI-driven features</span>, and build cloud-native solutions, targeting high-impact software engineering roles.
         </motion.p>
 
         {/* CTA buttons */}
@@ -122,11 +116,13 @@ export default function HeroSectionNew() {
           transition={{ duration: 0.6, delay: 1.1 }}
         >
           <a href="#projects" className="hero-cta-primary">
-            View My Work
-            <span className="hero-cta-arrow">→</span>
+            View Projects
+          </a>
+          <a href="https://github.com/luxmikant/res/blob/main/Ai_intern_VIT_LUXMIKANT_7018209392.pdf" target="_blank" rel="noopener noreferrer" className="hero-cta-secondary">
+            Download CV
           </a>
           <a href="#connect" className="hero-cta-secondary">
-            Let&apos;s Connect
+            Contact Me
           </a>
         </motion.div>
 

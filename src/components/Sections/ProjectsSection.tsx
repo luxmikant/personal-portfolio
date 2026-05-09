@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import { PROJECTS } from "@/utils/projectData";
 import type { Project } from "@/utils/projectData";
 
@@ -197,11 +198,11 @@ function StickyCard({
                   className="sticky-media-asset"
                 />
               ) : project.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={project.image}
                   alt={`${project.title} screenshot`}
-                  className="sticky-media-asset"
+                  fill
+                  className="sticky-media-asset object-cover"
                 />
               ) : (
                 <div className="sticky-media-fallback">

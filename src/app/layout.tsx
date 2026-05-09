@@ -28,12 +28,14 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     url: "/",
     siteName: SITE_NAME,
+    images: [{ url: "/og-image.jpg" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: ["/og-image.jpg"],
   },
 };
 

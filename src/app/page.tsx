@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import LandingPage from "./LandingPage";
 
 export const metadata: Metadata = {
-  title: "Luxmikant | Backend · Cloud · AI · Web3",
+  title: "Luxmikant | Computer Science Graduate · Backend + Cloud + AI Engineer",
   description:
-    "Interactive portfolio showcasing backend engineering, cloud-native systems, AI tools, and Web3 expertise.",
+    "Interactive portfolio showcasing backend architectures, AI integration, and cloud-native solutions.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Luxmikant | Backend · Cloud · AI · Web3",
+    title: "Luxmikant | Computer Science Graduate · Backend + Cloud + AI Engineer",
     description:
-      "Interactive portfolio showcasing backend engineering, cloud-native systems, AI tools, and Web3 expertise.",
+      "Interactive portfolio showcasing backend architectures, AI integration, and cloud-native solutions.",
     url: "/",
     type: "website",
+    images: [{ url: "/og-image.jpg" }],
   },
 };
 

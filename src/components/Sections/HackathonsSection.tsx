@@ -8,7 +8,8 @@ interface Hackathon {
   badge: string;          // short emoji or icon
   event: string;          // full event name
   project: string;        // what you built
-  description: string;
+  problem: string;
+  solution: string;
   devpost: string;
   tags: string[];
   year: string;
@@ -21,8 +22,8 @@ const HACKATHONS: Hackathon[] = [
     badge: "⚡",
     event: "Codegeist 2025: Atlassian Williams Racing Edition",
     project: "ExpertMatch",
-    description:
-      "Maps team expertise and routes design reviews to optimal reviewers — cutting review cycles by 60% while improving code quality. Seamlessly integrates with Confluence, Jira, and Slack.",
+    problem: "Long PR review cycles due to inefficient reviewer routing.",
+    solution: "Built a system that maps team expertise and routes design reviews to optimal reviewers — cutting review cycles by 60%. Integrates with Confluence, Jira, and Slack.",
     devpost: "https://devpost.com/software/expertmatch?ref_content=my-projects-tab&ref_feature=my_projects",
     tags: ["Forge", "Jira", "Confluence", "Slack", "AI Routing"],
     year: "2025",
@@ -33,8 +34,8 @@ const HACKATHONS: Hackathon[] = [
     badge: "📊",
     event: "Tableau Hackathon",
     project: "VitalFlow — AI-Agentic Hospital Command Center",
-    description:
-      "A closed-loop, Agentic Command Center that bridges the gap between Tableau Analytics and Salesforce Operations — turning data into autonomous clinical action.",
+    problem: "Disconnect between Tableau Analytics insights and Salesforce Operations action execution in healthcare.",
+    solution: "Developed a closed-loop, Agentic Command Center bridging Tableau and Salesforce to turn clinical data into autonomous operational action.",
     devpost: "https://devpost.com/software/vitalflow-the-ai-agentic-hospital-command-center",
     tags: ["Tableau", "Salesforce", "AI Agents", "Healthcare", "Analytics"],
     year: "2025",
@@ -91,7 +92,10 @@ function HackathonCard({ hack, index }: { hack: Hackathon; index: number }) {
       </motion.h3>
 
       {/* Description */}
-      <p className="hack-desc">{hack.description}</p>
+      <div className="hack-desc">
+        <p><strong>Problem:</strong> {hack.problem}</p>
+        <p className="mt-2"><strong>Solution:</strong> {hack.solution}</p>
+      </div>
 
       {/* Tags */}
       <motion.div
@@ -151,7 +155,7 @@ export default function HackathonsSection() {
           transition={{ duration: 0.6 }}
         >
           <span className="section-label-line" />
-          <span className="section-label-text">Hackathons</span>
+          <span className="section-label-text">Achievements</span>
         </motion.div>
 
         {/* Heading */}
