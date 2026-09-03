@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { NewsletterSubscriber, BlogPost } from "@/types/blog";
-import { INITIAL_BLOG_POSTS } from "@/utils/blogData";
+import { NewsletterSubscriber } from "@/types/blog";
+import { blogPosts } from "@/content/blogs";
 
 export default function SubscribersAdminPage() {
   const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
   const [loading, setLoading] = useState(true);
   const [copiedBCC, setCopiedBCC] = useState(false);
   const [searchFilter, setSearchFilter] = useState("");
-  const [selectedPostSlug, setSelectedPostSlug] = useState<string>(INITIAL_BLOG_POSTS[0].slug);
+  const [selectedPostSlug, setSelectedPostSlug] = useState<string>(blogPosts[0]?.slug || "");
   const [copiedSubject, setCopiedSubject] = useState(false);
   const [copiedBody, setCopiedBody] = useState(false);
 
@@ -58,16 +58,17 @@ export default function SubscribersAdminPage() {
   };
 
   // Selected post for dispatch template
-  const currentPost = INITIAL_BLOG_POSTS.find((p) => p.slug === selectedPostSlug) || INITIAL_BLOG_POSTS[0];
+  const currentPost = blogPosts.find((p) => p.slug === selectedPostSlug) || blogPosts[0];
 
-  const emailSubject = `[Luxmikant's Dispatch] New Post: ${currentPost.title}`;
-  const emailBody = `Hi there,
+  const emailSubject = currentPost ? `[Luxmikant's Dispatch] New Post: ${currentPost.title}` : "[Luxmikant's Dispatch]";
+  const emailBody = currentPost
+    ? `Hi there,
 
 A new technical deep dive has just been published on my portfolio:
 
 "${currentPost.title}"
 
-${currentPost.description}
+${currentPost.excerpt}
 
 Read the full article here:
 https://luxmikant.dev/blog/${currentPost.slug}
@@ -78,7 +79,7 @@ Warm regards,
 Luxmikant
 Backend + Cloud + AI Engineer | Kullu, Himachal
 https://github.com/luxmikant
-`;
+    : "";
 
   const handleCopySubject = () => {
     navigator.clipboard.writeText(emailSubject);
@@ -212,7 +213,7 @@ https://github.com/luxmikant
                 onChange={(e) => setSelectedPostSlug(e.target.value)}
                 className="px-3 py-1.5 text-xs bg-[var(--background)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:outline-none"
               >
-                {INITIAL_BLOG_POSTS.map((post) => (
+                {blogPosts.map((post) => (
                   <option key={post.slug} value={post.slug}>
                     {post.title}
                   </option>

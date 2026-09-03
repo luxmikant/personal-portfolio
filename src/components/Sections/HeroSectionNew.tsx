@@ -75,12 +75,12 @@ export default function HeroSectionNew() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <Link
-              href="/blog/clean-go-microservices-connect4"
+              href="/blog/distil-context-engine"
               className="hero-dispatch-pill group"
             >
               <span className="hero-dispatch-dot" />
               <span className="hero-dispatch-text">
-                <strong>Latest Dispatch:</strong> Clean Go Microservices
+                <strong>Latest Blog:</strong> Distil — Context Engine for Agents
               </span>
               <span className="hero-dispatch-arrow group-hover:translate-x-0.5 transition-transform">↗</span>
             </Link>

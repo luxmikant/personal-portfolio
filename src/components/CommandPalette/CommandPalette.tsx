@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { INITIAL_BLOG_POSTS } from "@/utils/blogData";
+import { blogPosts } from "@/content/blogs";
 
 interface CommandItem {
   id: string;
@@ -161,7 +161,7 @@ export default function CommandPalette() {
     },
 
     // Articles
-    ...INITIAL_BLOG_POSTS.map((post) => ({
+    ...blogPosts.map((post) => ({
       id: `post-${post.slug}`,
       title: post.title,
       category: "Articles" as const,

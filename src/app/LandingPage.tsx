@@ -11,14 +11,8 @@ import SkillsSection from "@/components/Sections/SkillsSection";
 import BlogSection from "@/components/Sections/BlogSection";
 import NewsletterSection from "@/components/Newsletter/NewsletterSection";
 import ConnectSection from "@/components/Sections/ConnectSection";
-import { BlogPost } from "@/types/blog";
-import { INITIAL_BLOG_POSTS } from "@/utils/blogData";
 
-interface LandingPageProps {
-  posts?: BlogPost[];
-}
-
-export default function LandingPage({ posts = INITIAL_BLOG_POSTS }: LandingPageProps) {
+export default function LandingPage() {
   const [showSplash, setShowSplash] = useState(true);
   const [showContent, setShowContent] = useState(false);
 
@@ -72,8 +66,8 @@ export default function LandingPage({ posts = INITIAL_BLOG_POSTS }: LandingPageP
           {/* Divider */}
           <div className="section-divider" />
 
-          {/* 6. Blog & Architecture Dispatches */}
-          <BlogSection posts={posts} />
+          {/* 6. Blog & Notes */}
+          <BlogSection />
 
           {/* Divider */}
           <div className="section-divider" />
