@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import HimalayanParallax from "@/components/Parallax/HimalayanParallax";
 
@@ -56,16 +57,35 @@ export default function HeroSectionNew() {
         className="hero-content"
         style={{ y: textY }}
       >
-        {/* Small intro line */}
-        <motion.div
-          className="hero-intro-badge"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <span className="hero-badge-dot" />
-          <span>Kullu, Himachal — India</span>
-        </motion.div>
+        {/* Intro badges: Location + Latest Dispatch */}
+        <div className="flex flex-wrap items-center gap-3 mb-6">
+          <motion.div
+            className="hero-intro-badge !mb-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <span className="hero-badge-dot" />
+            <span>Kullu, Himachal — India</span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <Link
+              href="/blog/clean-go-microservices-connect4"
+              className="hero-dispatch-pill group"
+            >
+              <span className="hero-dispatch-dot" />
+              <span className="hero-dispatch-text">
+                <strong>Latest Dispatch:</strong> Clean Go Microservices
+              </span>
+              <span className="hero-dispatch-arrow group-hover:translate-x-0.5 transition-transform">↗</span>
+            </Link>
+          </motion.div>
+        </div>
 
         {/* Name */}
         <motion.h1
@@ -118,6 +138,9 @@ export default function HeroSectionNew() {
           <a href="#projects" className="hero-cta-primary">
             View Projects
           </a>
+          <Link href="/blog" className="hero-cta-secondary">
+            Read Blog
+          </Link>
           <a href="https://github.com/luxmikant/res/blob/main/Ai_intern_VIT_LUXMIKANT_7018209392.pdf" target="_blank" rel="noopener noreferrer" className="hero-cta-secondary">
             Download CV
           </a>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LandingPage from "./LandingPage";
+import { getAllPosts } from "@/utils/storage";
 
 export const metadata: Metadata = {
   title: "Luxmikant | Computer Science Graduate · Backend + Cloud + AI Engineer",
@@ -19,5 +20,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <LandingPage />;
+  const posts = getAllPosts();
+  return <LandingPage posts={posts} />;
 }

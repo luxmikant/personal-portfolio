@@ -8,9 +8,17 @@ import AboutSectionNew from "@/components/Sections/AboutSectionNew";
 import ProjectsSection from "@/components/Sections/ProjectsSection";
 import HackathonsSection from "@/components/Sections/HackathonsSection";
 import SkillsSection from "@/components/Sections/SkillsSection";
+import BlogSection from "@/components/Sections/BlogSection";
+import NewsletterSection from "@/components/Newsletter/NewsletterSection";
 import ConnectSection from "@/components/Sections/ConnectSection";
+import { BlogPost } from "@/types/blog";
+import { INITIAL_BLOG_POSTS } from "@/utils/blogData";
 
-export default function LandingPage() {
+interface LandingPageProps {
+  posts?: BlogPost[];
+}
+
+export default function LandingPage({ posts = INITIAL_BLOG_POSTS }: LandingPageProps) {
   const [showSplash, setShowSplash] = useState(true);
   const [showContent, setShowContent] = useState(false);
 
@@ -58,13 +66,25 @@ export default function LandingPage() {
           {/* 4. Projects */}
           <ProjectsSection />
 
-          {/* 4. Hackathons */}
+          {/* 5. Hackathons */}
           <HackathonsSection />
 
           {/* Divider */}
           <div className="section-divider" />
 
-          {/* 5. Connect / Work With Me */}
+          {/* 6. Blog & Architecture Dispatches */}
+          <BlogSection posts={posts} />
+
+          {/* Divider */}
+          <div className="section-divider" />
+
+          {/* 7. Newsletter Subscription Section */}
+          <NewsletterSection source="landing_page" />
+
+          {/* Divider */}
+          <div className="section-divider" />
+
+          {/* 8. Connect / Work With Me */}
           <ConnectSection />
         </motion.div>
       )}

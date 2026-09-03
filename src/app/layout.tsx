@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavigationBar from "@/components/Navigation/NavigationBar";
+import CommandPalette from "@/components/CommandPalette/CommandPalette";
 import SmoothScrollProvider from "@/components/Providers/SmoothScrollProvider";
 import MotionProvider from "@/components/Providers/MotionProvider";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/utils/siteConfig";
@@ -72,6 +73,7 @@ export default function RootLayout({
         <MotionProvider>
           <SmoothScrollProvider>
             <NavigationBar />
+            <CommandPalette />
             <main>{children}</main>
           </SmoothScrollProvider>
         </MotionProvider>

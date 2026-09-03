@@ -8,4 +8,4 @@ export const SITE_TITLE = "Luxmikant | Computer Science Graduate · Backend + Cl
 export const SITE_DESCRIPTION =
   "Interactive portfolio showcasing backend architectures, AI integration, and cloud-native solutions.";
 
-export const SITE_PATHS = ["/"] as const;
+export const SITE_PATHS = ["/", "/blog"] as const;
